@@ -1,0 +1,75 @@
+---
+# tasks file for haproxy
+
+- name: Install HAProxy
+  dnf:
+    name: haproxy.x86_64
+    state: latest
+
+- name: Install supplementary packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ packages.redhat }}"
+
+- name: Turn On packet forwarding in order HAProxy to start
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    sysctl_set: yes
+
+- name: Turn On Non-Local binding in order HAProxy to start
+  sysctl:
+    name: net.ipv4.ip_nonlocal_bind
+    value: "1"
+    sysctl_set: yes
+
+- name: Allowing firewall rules for services
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - http
+    - https
+
+- name: Allowing firewall rules for ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  notify: Restart firewalld
+  loop:
+    - 6443/tcp  # HAProxy
+    - 6443/udp
+    - 9000/tcp  # HAProxy stats/health page
+    - 22623/tcp  # HAProxy
+    - 22623/udp
+
+- name: Enable SELinux
+  ansible.posix.selinux:
+    policy: targeted
+    state: enforcing
+
+- name: Allow haproxy outgoing connections in SELinux
+  seboolean:
+    name: haproxy_connect_any
+    state: yes
+    persistent: yes
+
+- name: Allow haproxy to bind to custom ports with SELinux
+  seport:
+    ports: "{{ item }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  loop:
+    - 6443
+    - 9000
+    - 22623
+
+# - name: Ensure HAProxy is enabled and running
+#   service:
+#     name: haproxy
+#     state: started
+#     enabled: yes

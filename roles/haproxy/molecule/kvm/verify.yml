@@ -1,0 +1,15 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Example assertion
+    assert:
+      that: true
+
+  - name: Verify HAProxy serves stats page
+    uri:
+      url: "http://localhost:9000/health"
+      status_code: 200

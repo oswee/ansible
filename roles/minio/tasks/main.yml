@@ -1,0 +1,21 @@
+---
+# tasks file for minio
+
+- name: Install
+  import_tasks: install.yml
+  become: yes
+  tags:
+    - minio:setup
+    - minio:setup:install
+
+# - name: Config
+#   import_tasks: configure.yml
+#   become: yes
+#   tags:
+#     - minio:setup
+#     - minio:setup:config
+
+# - name: Destroy
+#   import_tasks: destroy.yml
+#   tags:
+#     - minio:destroy
