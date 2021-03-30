@@ -1,0 +1,16 @@
+---
+# tasks file for HashiCorp Vault
+
+- name: Install
+  become: yes
+  import_tasks: install.yml
+  tags:
+    - vault:setup
+    - vault:setup:install
+
+- name: Configure
+  become: yes
+  import_tasks: configure.yml
+  tags:
+    - vault:setup
+    - vault:setup:config

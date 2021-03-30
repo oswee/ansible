@@ -1,0 +1,93 @@
+---
+# tasks file for vault
+
+# TODO: 1: Disable mlock
+
+- name: Install rpm keys
+  rpm_key:
+    state: present
+    key: "{{ item }}"
+  loop:
+    - https://rpm.releases.hashicorp.com/gpg
+
+- name: Install HashiCorp repository
+  get_url:
+    url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+    dest: /etc/yum.repos.d/hashicorp.repo
+
+- name: Install packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ packages.redhat }}"
+
+- name: Copy Vault systemd sevice unit
+  copy:
+    src: vault.service
+    dest: /etc/systemd/system/vault.service
+    mode: '0644'
+
+- name: Create Vault system group
+  group:
+    name: vault
+    state: present
+    system: yes
+
+- name: Create Vault user
+  user:
+    name: vault
+    home: /etc/vault.d
+    system: yes
+    shell: /bin/false
+    group: vault
+
+- name: Force systemd to re-execute itself (2.8 and above)
+  systemd:
+    daemon_reexec: yes
+
+- name: Allow the service to be accessed at the firewall level
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  notify: Restart Firewalld
+  loop:
+    - 8200/tcp
+    - 8201/tcp
+
+# - name: Allow the service to be accessed at the firewall level
+#   firewalld:
+#     port: 8201/tcp
+#     permanent: yes
+#     state: enabled
+#   notify: Restart Firewalld
+
+# https://www.vaultproject.io/docs/configuration#parameters
+# Actually we don't need to do this because it's done in Systemd unit file.
+# - name: Set mlock capabilities
+#   become: yes
+#   capabilities:
+#     path: /usr/bin/vault
+#     capability: cap_ipc_lock=+ep
+#     state: present
+
+# - name: install packages
+#   become: yes
+#   package:
+#     name: "{{ item }}"
+#     update_cache: yes
+#   with_items: "{{ vault_install_prerequisites }}"
+
+# - name: download Hashicorp Vault
+#   unarchive:
+#     src: https://releases.hashicorp.com/vault/1.6.1/vault_1.6.1_linux_amd64.zip
+#     dest: /tmp
+#     remote_src: yes
+
+# - name: copy Vault binary
+#   become: yes
+#   copy:
+#     src: /tmp/vault
+#     dest: /usr/local/bin
+#     mode: a+x
+#     remote_src: yes

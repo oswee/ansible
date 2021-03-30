@@ -1,0 +1,42 @@
+---
+# tasks file for vault
+
+- name: create vault directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: vault
+    group: vault
+    mode: '0755'
+  loop:
+    - /etc/vault.d
+    - /opt/vault/data
+    - /opt/vault/tls
+
+- name: Copy Vault configuration file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: vault
+    group: vault
+    # setype: named_conf_t
+    mode: '0640'
+  loop:
+    - { src: "vault.hcl.j2", dest: "/etc/vault.d/vault.hcl" }
+
+# - name: copy TLS certificates
+#   copy:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: vault
+#     group: vault
+#     remote_src: yes
+#   loop:
+#     - { src: "/etc/letsencrypt/live/{{ root_domain }}/fullchain.pem", dest: "/opt/vault/tls" }
+#     - { src: "/etc/letsencrypt/live/{{ root_domain }}/privkey.pem", dest: "/opt/vault/tls" }
+
+- name: Make sure a vault.service is enabled and running
+  systemd:
+    name: vault
+    enabled: yes
+    state: started

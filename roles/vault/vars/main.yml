@@ -1,0 +1,7 @@
+---
+# vars file for roles/vault
+
+packages:
+  redhat:
+    - firewalld
+    - vault

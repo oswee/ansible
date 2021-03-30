@@ -1,0 +1,12 @@
+---
+# handlers file for vault
+
+- name: Restart Firewalld
+  service:
+    name: firewalld
+    state: restarted
+
+- name: Restart Vault
+  service:
+    name: vault
+    state: restarted
