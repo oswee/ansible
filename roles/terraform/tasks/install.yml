@@ -1,6 +1,11 @@
 ---
 # tasks file for roles/terraform
 
+- name: install unzip package
+  dnf:
+    name: unzip.x86_64
+    state: latest
+
 - name: download Terraform
   unarchive:
     src: "{{ terraform_url }}"
@@ -50,4 +55,3 @@
     dest: "/home/{{ become_user }}/.terraform.d/plugins"
     mode: a+x
     remote_src: yes
-
