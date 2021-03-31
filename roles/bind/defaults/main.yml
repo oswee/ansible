@@ -1,0 +1,9 @@
+---
+# defaults file for bind
+
+root_domain: example.com
+cluster_name: ocp
+network: 192.168.1
+dns:
+  - forwarder1: 1.1.1.1
+  - forwarder2: 8.8.8.8
