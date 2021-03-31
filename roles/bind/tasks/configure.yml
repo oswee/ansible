@@ -10,14 +10,14 @@
     setype: named_conf_t
     mode: '0644'
   loop:
-    - {src: '{{ cluster_name }}/named.conf.j2', dest: '/etc/named.conf'}
-    - {src: '{{ cluster_name }}/ocp.example.com.zone.j2', dest: '/var/named/{{ cluster_name }}.{{ root_domain }}.zone'}
-    - {src: '{{ cluster_name }}/1.168.192.in-addr.arpa.zone.j2', dest: "/var/named/{{ network | ipaddr('revdns') | regex_replace('^[0-9]+\\.', '') }}zone"}
+    - {src: 'named.conf.j2', dest: '/etc/named.conf'}
+    - {src: 'ocp.example.com.zone.j2', dest: '/var/named/{{ cluster_name }}.{{ root_domain }}.zone'}
+    - {src: '1.168.192.in-addr.arpa.zone.j2', dest: "/var/named/{{ network | ipaddr('revdns') | regex_replace('^[0-9]+\\.', '') }}zone"}
   notify: restart named
 
 - name: deploy resolv.conf template
   template:
-    src: '{{ cluster_name }}/resolv.conf.j2'
+    src: 'resolv.conf.j2'
     dest: /etc/resolv.conf
     setype: named_conf_t
     # owner: root
