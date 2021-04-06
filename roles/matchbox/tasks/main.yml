@@ -1,12 +1,7 @@
 ---
-# tasks file for install_matchbox
+# tasks file for roles/matchbox
 
 - name: Install Matchbox
   import_tasks: install.yml
   tags:
     - matchbox:install
-
-- name: Deploy assets
-  import_tasks: deploy_assets.yml
-  tags:
-    - matchbox:config

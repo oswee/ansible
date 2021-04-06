@@ -1,5 +1,5 @@
 ---
-# tasks file for install_matchbox
+# tasks file for roles/matchbox
 
 - name: Install dependencies
   dnf:
