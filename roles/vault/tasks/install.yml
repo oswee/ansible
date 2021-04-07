@@ -46,7 +46,7 @@
     daemon_reexec: yes
 
 - name: Allow the service to be accessed at the firewall level
-  firewalld:
+  ansible.posix.firewalld:
     port: "{{ item }}"
     permanent: yes
     state: enabled
