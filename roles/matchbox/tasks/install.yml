@@ -7,7 +7,6 @@
     state: latest
   loop:
     - tar
-  become: yes
 
 - name: Download Matchbox
   unarchive:
@@ -60,7 +59,7 @@
     - /var/lib/matchbox/profiles
 
 - name: Allow the service to be accessed at the firewall level
-  firewalld:
+  ansible.posix.firewalld:
     port: 8080/tcp
     permanent: yes
     state: enabled
