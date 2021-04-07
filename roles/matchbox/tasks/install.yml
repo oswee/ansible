@@ -58,13 +58,6 @@
     - /var/lib/matchbox/ignition
     - /var/lib/matchbox/profiles
 
-- name: Allow the service to be accessed at the firewall level
-  ansible.posix.firewalld:
-    port: 8080/tcp
-    permanent: yes
-    state: enabled
-  notify: Restart Firewalld
-
 - name: Start Matchbox service
   service:
     name: matchbox
