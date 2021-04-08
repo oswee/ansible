@@ -6,6 +6,7 @@
     name: '{{ item }}'
     state: latest
   loop:
+    - firewalld
     - bind-chroot
     # - nm-connection-editor
     # - NetworkManager-glib
