@@ -2,7 +2,6 @@
 # tasks file for bind
 
 - name: install dependencies
-  become: true
   dnf:
     name: '{{ item }}'
     state: latest
@@ -15,8 +14,7 @@
     # - python3-policycoreutils
 
 - name: add DNS service to firewall
-  become: true
-  firewalld:
+  ansible.posix.firewalld:
     service: dns
     permanent: yes
     state: enabled
