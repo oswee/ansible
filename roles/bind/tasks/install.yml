@@ -1,20 +1,27 @@
 ---
-# tasks file for bind
+# tasks file for roles/bind
 
-- name: install dependencies
-  dnf:
+- name: install packages
+  ansible.builtin.dnf:
     name: '{{ item }}'
     state: latest
   loop:
-    # - firewalld
-    # - bind-chroot
     - bind
     - bind-utils
-    # - nm-connection-editor
-    # - NetworkManager-glib
-    # - NetworkManager-libnm
-    # - python3-libsemanage
-    # - python3-policycoreutils
+    # - bind-chroot
+  notify:
+    - enable named
+    - start named
+
+# - name: Open firewall tcp port
+#   ansible.posix.firewalld:
+#     port: '{{ item }}'
+#     permanent: yes
+#     state: enabled
+#   loop:
+#     - 53/udp
+#     - 53/tcp
+#   notify: restart firewalld
 
 - name: add DNS service to firewall
   ansible.posix.firewalld:
@@ -23,5 +30,3 @@
     state: enabled
   notify:
     - restart firewalld
-    - enable named
-    - start named

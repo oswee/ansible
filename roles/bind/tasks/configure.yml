@@ -1,18 +1,14 @@
 ---
 # tasks file for roles/bind
 
-- name: copy named.conf and zone files
+- name: copy configuration
   template:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
+    src: named.conf.j2
+    dest: /etc/named.conf
     owner: named
     group: named
     setype: named_conf_t
     mode: '0644'
-  loop:
-    - {src: 'named.conf.j2', dest: '/etc/named.conf'}
-    - {src: 'ocp.example.com.zone.j2', dest: '/var/named/{{ cluster_name }}.{{ root_domain }}.zone'}
-    - {src: '1.168.192.in-addr.arpa.zone.j2', dest: "/var/named/{{ network | ipaddr('revdns') | regex_replace('^[0-9]+\\.', '') }}zone"}
   notify: restart named
 
 - name: deploy resolv.conf template

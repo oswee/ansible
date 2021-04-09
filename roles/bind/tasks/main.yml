@@ -13,15 +13,3 @@
   tags:
     - named:setup
     - named:setup:config
-
-# - name: start
-#   import_tasks: start.yml
-#   become: yes
-#   tags:
-#     - named:setup
-#     - named:setup:start
-
-# - name: remove named
-#   import_tasks: remove.yml
-#   tags:
-#   - named:remove
