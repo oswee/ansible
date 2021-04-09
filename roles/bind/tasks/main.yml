@@ -1,6 +1,10 @@
 ---
 # tasks file for roles/named
 
+- name: Install Firewalld
+  include_role:
+    name: dzintars.ansible.firewalld
+
 - name: install
   import_tasks: install.yml
   tags:
