@@ -6,7 +6,7 @@
     name: '{{ item }}'
     state: latest
   loop:
-    - firewalld
+    # - firewalld
     # - bind-chroot
     - bind
     - bind-utils
