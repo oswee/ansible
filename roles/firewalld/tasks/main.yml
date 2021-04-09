@@ -1,0 +1,9 @@
+---
+# tasks file for roles/firewalld
+
+- name: install Firewalld
+  dnf:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - firewalld

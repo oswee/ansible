@@ -1,0 +1,18 @@
+---
+# handlers file for roles/firewalld
+
+- name: enable firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    enabled: yes
+
+- name: start firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    state: started
+
+- name: restart firewalld
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: firewalld
