@@ -1,8 +1,7 @@
 ---
-# tasks file for install_dhcp
+# tasks file for roles/dhcp
 
 - name: deploy dhcpd.conf template
-  become: yes
   template:
     src: dhcpd.conf.j2
     dest: /etc/dhcp/dhcpd.conf
@@ -14,8 +13,7 @@
     - restart dhcpd
 
 - name: allowing firewall rules for ports
-  become: true
-  firewalld:
+  ansible.posix.firewalld:
     port: '{{ item }}'
     permanent: yes
     state: enabled
@@ -24,17 +22,14 @@
     - 67/udp      # bootp & DHCP
 
 - name: add DHCP service to firewall
-  become: yes
-  firewalld:
+  ansible.posix.firewalld:
     service: dhcp
     permanent: yes
     state: enabled
   notify: restart firewalld
 
 - name: start DHCP service
-  become: yes
   systemd:
     name: dhcpd
     state: started
     enabled: yes
-
