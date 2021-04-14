@@ -1,8 +1,24 @@
 ---
 # tasks file for roles/dhcp
 
-- name: deploy dhcpd.conf template
-  template:
+# - name: allowing firewall rules for ports
+#   ansible.posix.firewalld:
+#     port: '{{ item }}'
+#     permanent: yes
+#     state: enabled
+#   notify: restart firewalld
+#   loop:
+#     - 67/udp      # bootp & DHCP
+
+- name: Add DHCP service to firewall
+  ansible.posix.firewalld:
+    service: dhcp
+    permanent: yes
+    state: enabled
+  notify: restart firewalld
+
+- name: Deploy dhcpd.conf template
+  ansible.builtin.template:
     src: dhcpd.conf.j2
     dest: /etc/dhcp/dhcpd.conf
     owner: root
@@ -11,25 +27,3 @@
     backup: yes
   notify:
     - restart dhcpd
-
-- name: allowing firewall rules for ports
-  ansible.posix.firewalld:
-    port: '{{ item }}'
-    permanent: yes
-    state: enabled
-  notify: restart firewalld
-  loop:
-    - 67/udp      # bootp & DHCP
-
-- name: add DHCP service to firewall
-  ansible.posix.firewalld:
-    service: dhcp
-    permanent: yes
-    state: enabled
-  notify: restart firewalld
-
-- name: start DHCP service
-  systemd:
-    name: dhcpd
-    state: started
-    enabled: yes

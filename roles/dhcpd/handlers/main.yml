@@ -1,6 +1,16 @@
 ---
 # handlers file for install_dhcp
 
+- name: eanble dhcpd
+  systemd:
+    state: enabled
+    name: dhcpd
+
+- name: start dhcpd
+  systemd:
+    state: started
+    name: dhcpd
+
 - name: restart dhcpd
   systemd:
     state: restarted

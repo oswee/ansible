@@ -1,12 +1,13 @@
 ---
 # tasks file for roles/dhcp
 
-- name: install DHCP
+- name: Install packages
   become: yes
-  dnf:
+  ansible.builtin.dnf:
     name: '{{ item }}'
-    state: latest
+    state: present
   loop:
     # - dhcp
     - dhcp-server
-
+  notify:
+    - enable dhcpd

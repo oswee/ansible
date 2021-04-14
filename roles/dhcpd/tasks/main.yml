@@ -1,15 +1,8 @@
 ---
 # tasks file for roles/dhcpd
 
-- name: Install DHCP
+- name: Install
   import_tasks: install.yml
-  tags:
-    - dhcpd:setup
-    - dhcpd:setup:install
 
-- name: Update configuration
+- name: Configure
   import_tasks: configure.yml
-  tags:
-    - dhcpd:setup
-    - dhcpd:setup:config
-
