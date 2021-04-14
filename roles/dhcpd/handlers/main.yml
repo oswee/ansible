@@ -1,7 +1,7 @@
 ---
 # handlers file for install_dhcp
 
-- name: eanble dhcpd
+- name: enable dhcpd
   systemd:
     state: enabled
     name: dhcpd
