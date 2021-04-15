@@ -1,14 +1,14 @@
 ---
 # tasks file for roles/dhcp
 
-# - name: allowing firewall rules for ports
-#   ansible.posix.firewalld:
-#     port: '{{ item }}'
-#     permanent: yes
-#     state: enabled
-#   notify: restart firewalld
-#   loop:
-#     - 67/udp      # bootp & DHCP
+- name: allowing firewall rules for ports
+  ansible.posix.firewalld:
+    port: '{{ item }}'
+    permanent: yes
+    state: enabled
+  notify: restart firewalld
+  loop:
+    - 67/udp      # bootp & DHCP
 
 - name: Add DHCP service to firewall
   ansible.posix.firewalld:
