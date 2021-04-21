@@ -7,13 +7,13 @@
     name: unzip.x86_64
     state: latest
 
-- name: Download Terraform
+- name: Download Terraform "{{ terraform_version }}"
   unarchive:
     src: "{{ terraform_url }}"
     dest: /tmp
     remote_src: yes
 
-- name: Copy Terraform binary
+- name: Copy Terraform "{{ terraform_version }}" binary
   become: yes
   copy:
     src: /tmp/terraform
