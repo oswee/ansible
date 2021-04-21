@@ -2,6 +2,7 @@
 # tasks file for roles/firewalld
 
 - name: install Firewalld
+  become: yes
   dnf:
     name: '{{ item }}'
     state: latest
