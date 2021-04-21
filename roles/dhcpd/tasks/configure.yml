@@ -20,6 +20,7 @@
   notify: restart firewalld
 
 - name: Deploy dhcpd.conf template
+  become: yes
   ansible.builtin.template:
     src: dhcpd.conf.j2
     dest: /etc/dhcp/dhcpd.conf
