@@ -9,5 +9,3 @@
   loop:
     # - dhcp
     - dhcp-server
-  notify:
-    - enable dhcpd
