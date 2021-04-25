@@ -6,6 +6,8 @@
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
+  notify:
+    - start dhcpd
   loop:
     # - dhcp
     - dhcp-server
