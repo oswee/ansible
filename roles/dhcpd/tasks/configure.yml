@@ -30,4 +30,3 @@
     backup: yes
   notify:
     - restart dhcpd
-    - enable dhcpd

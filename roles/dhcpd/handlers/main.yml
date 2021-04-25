@@ -4,20 +4,21 @@
 - name: start dhcpd
   become: yes
   ansible.builtin.systemd:
-    state: started
     name: dhcpd
+    state: started
+    enabled: yes
 
 - name: restart dhcpd
   become: yes
   ansible.builtin.systemd:
-    state: restarted
     name: dhcpd
+    state: restarted
 
 - name: enable dhcpd
   become: yes
   ansible.builtin.systemd:
-    state: enabled
     name: dhcpd
+    state: enabled
 
 - name: restart firewalld
   become: yes
