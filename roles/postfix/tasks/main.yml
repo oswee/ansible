@@ -1,0 +1,8 @@
+---
+# tasks file for dzintars.postfix
+
+- name: Install packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ packages.redhat }}"
