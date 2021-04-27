@@ -1,0 +1,8 @@
+---
+# handlers file for roles/libvirt
+
+- name: restart libvirtd
+  become: true
+  service:
+    name: libvirtd
+    state: restarted
