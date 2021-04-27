@@ -1,0 +1,16 @@
+---
+# tasks file for jenkins
+
+- name: install
+  import_tasks: install.yml
+  become: yes
+  tags:
+    - jenkins:setup
+    - jenkins:setup:install
+
+- name: configure
+  import_tasks: configure.yml
+  become: yes
+  tags:
+    - jenkins:setup
+    - jenkins:setup:config

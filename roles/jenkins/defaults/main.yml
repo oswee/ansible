@@ -1,0 +1,11 @@
+---
+# defaults file for jenkins
+
+jenkins_home: /var/lib/jenkins
+jenkins_user: jenkins
+jenkins_group: jenkins
+jenkins_hostname: localhost
+jenkins_listen_address: 127.0.0.1
+jenkins_http_port: 9093
+
+vault_uri: "https://vault.example.com"

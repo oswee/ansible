@@ -1,0 +1,67 @@
+---
+# tasks file for jenkins
+
+- name: Install rpm key
+  rpm_key:
+    state: present
+    key: "{{ item }}"
+  loop:
+    - https://pkg.jenkins.io/redhat/jenkins.io.key
+
+- name: Install Jenkins repo
+  get_url:
+    url: http://pkg.jenkins-ci.org/redhat/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: Install packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ packages.redhat }}"
+
+- name: Create Jenkins system group
+  group:
+    name: "{{ jenkins_group }}"
+    state: present
+    system: yes
+
+- name: Create Jenkins user
+  user:
+    name: "{{ jenkins_user }}"
+    home: "{{ jenkins_home }}"
+    system: yes
+    shell: /bin/false  # TODO: Does this will allow to execute SSH Cert rotation?
+    group: "{{ jenkins_group }}"
+
+# TODO: Add the Jenkins to the libvirt group in order to allow Jenkins to
+# create localhost virtual machines.
+
+- name: Allowing firewall services
+  firewalld:
+    service: '{{ item }}'
+    permanent: yes
+    state: enabled
+  notify:
+    - restart firewalld
+  with_items:
+    - jenkins
+
+- name: Allowing firewall ports
+  firewalld:
+    port: "{{ jenkins_http_port }}/tcp"
+    permanent: yes
+    state: enabled
+  notify:
+    - restart firewalld
+
+- name: Generate Jenkins OpenSSH ECDSA user keypair
+  community.crypto.openssh_keypair:
+    path: "{{ jenkins_home }}/.ssh"
+    comment: jenkins@workstation
+    type: ecdsa
+    size: 521
+    force: yes
+    state: present
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode: 0600
