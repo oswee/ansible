@@ -1,0 +1,19 @@
+---
+# tasks file for roles/tftp
+
+- name: Stop TFTP service
+  ansible.builtin.systemd:
+    name: tftp
+    state: stopped
+
+- name: Remove TFTP
+  become: yes
+  ansible.builtin.dnf:
+    name: tftp-server
+    state: absent
+
+- name: Romove TFTP service from firewall
+  ansible.posix.firewalld:
+    service: tftp
+    state: absent
+  notify: Restart Firewalld
