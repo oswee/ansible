@@ -2,6 +2,7 @@
 # tasks file for roles/ipxe
 
 - name: Install iPXE
+  become: yes
   dnf:
     name: '{{ item }}'
     state: latest
@@ -9,12 +10,14 @@
     - ipxe-bootimgs
 
 - name: Ensure TFTPboot directory exists
+  become: yes
   file:
     path: /var/lib/tftpboot
     state: directory
     mode: '0755'
 
 - name: Link the image
+  become: yes
   file:
     src: /usr/share/ipxe/undionly.kpxe
     dest: /var/lib/tftpboot/undionly.kpxe
