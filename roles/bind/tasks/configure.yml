@@ -2,6 +2,7 @@
 # tasks file for roles/bind
 
 - name: Copy configuration
+  become: yes
   ansible.builtin.template:
     src: named.conf.j2
     dest: /etc/named.conf
@@ -12,6 +13,7 @@
   notify: restart named
 
 - name: Deploy resolv.conf template
+  become: yes
   ansible.builtin.template:
     src: 'resolv.conf.j2'
     dest: /etc/resolv.conf
@@ -24,10 +26,11 @@
     - restart NetworkManager
 
 - name: Add an Ethernet connection with static IP configuration
+  become: yes
   community.general.nmcli:
     conn_name: eth0
     type: ethernet
-    dns4: '{{ network }}.254'
+    dns4: '{{ network }}.251'
     dns4_search: '{{ cluster_name }}.{{ root_domain }}'
     state: present
   notify:
