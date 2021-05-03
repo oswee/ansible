@@ -1,13 +1,13 @@
 ---
-# tasks file for haproxy
+# tasks file for roles/haproxy
 
 - name: Install HAProxy
-  dnf:
+  ansible.builtin.dnf:
     name: haproxy.x86_64
     state: latest
 
 - name: Install supplementary packages
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: latest
   loop: "{{ packages.redhat }}"
