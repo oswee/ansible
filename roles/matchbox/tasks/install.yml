@@ -2,50 +2,55 @@
 # tasks file for roles/matchbox
 
 - name: Install dependencies
-  dnf:
+  become: yes
+  ansible.builtin.dnf:
     name: '{{ item }}'
     state: latest
   loop:
     - tar
 
 - name: Download Matchbox
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://github.com/poseidon/matchbox/releases/download/v0.9.0/matchbox-v0.9.0-linux-amd64.tar.gz
     dest: /tmp
     remote_src: yes
 
 - name: Copy Matchbox binary
-  copy:
+  ansible.builtin.copy:
     src: /tmp/matchbox-v0.9.0-linux-amd64/matchbox
     dest: /usr/local/bin
     mode: a+x
     remote_src: yes
 
 - name: Copy Matchbox example systemd unit to allow starting matchbox at boot
-  copy:
+  ansible.builtin.copy:
     src: /tmp/matchbox-v0.9.0-linux-amd64/contrib/systemd/matchbox.service
     dest: /etc/systemd/system/matchbox.service
     remote_src: yes
     mode: '0644'
 
 - name: Create Matchbox system group
-  group:
+  become: yes
+  ansible.builtin.group:
     name: matchbox
     state: present
     system: yes
 
 - name: Create Matchbox user
-  user:
+  become: yes
+  ansible.builtin.user:
     name: matchbox
     system: yes
     group: matchbox
 
 - name: just force systemd to re-execute itself (2.8 and above)
-  systemd:
+  become: yes
+  ansible.builtin.systemd:
     daemon_reexec: yes
 
 - name: Create Matchbox directories
-  file:
+  become: yes
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: matchbox
@@ -59,7 +64,8 @@
     - /var/lib/matchbox/profiles
 
 - name: Start Matchbox service
-  service:
+  become: yes
+  ansible.builtin.systemd:
     name: matchbox
     state: started
     enabled: yes
