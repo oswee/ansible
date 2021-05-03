@@ -1,30 +1,30 @@
 ---
 # handlers file for roles/named
 
-- name: enable named
-  systemd:
-    name: named
-    enabled: yes
-
 - name: start named
-  systemd:
+  ansible.builtin.systemd:
     name: named
     state: started
 
+- name: enable named
+  ansible.builtin.systemd:
+    name: named
+    enabled: yes
+
 - name: restart named
-  systemd:
+  ansible.builtin.systemd:
     state: restarted
     daemon_reload: yes
     name: named
 
 # - name: restart firewalld
-#   systemd:
+#   ansible.builtin.systemd:
 #     state: restarted
 #     daemon_reload: yes
 #     name: firewalld
 
 - name: restart NetworkManager
-  systemd:
+  ansible.builtin.systemd:
     state: restarted
     daemon_reload: yes
     name: NetworkManager
