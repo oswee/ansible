@@ -7,7 +7,7 @@ haproxy_user: haproxy
 haproxy_group: haproxy
 
 root_domain: oswee.com
-name: bastion
+hostname: bastion
 network: 192.168.1
-host: 2
-cluster_name: ocp
+host: 250
+cluster_name: dev
