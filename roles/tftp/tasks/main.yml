@@ -32,7 +32,8 @@
 #     force: yes
 #     state: link
 
-- name: Add TFTP service to firewall
+- name: Add TFTP service to the firewall
+  become: yes
   ansible.posix.firewalld:
     service: tftp
     permanent: yes
@@ -40,6 +41,7 @@
   notify: Restart Firewalld
 
 - name: Start TFTP service
+  become: yes
   ansible.builtin.systemd:
     name: tftp
     state: started

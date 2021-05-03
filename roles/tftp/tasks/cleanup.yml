@@ -12,7 +12,7 @@
     name: tftp-server
     state: absent
 
-- name: Romove TFTP service from firewall
+- name: Remove TFTP service from firewall
   ansible.posix.firewalld:
     service: tftp
     state: absent
