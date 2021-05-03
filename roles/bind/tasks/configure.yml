@@ -28,7 +28,7 @@
 - name: Add an Ethernet connection with static IP configuration
   become: yes
   community.general.nmcli:
-    conn_name: eth0
+    conn_name: '{{ network_interface_name }}'
     type: ethernet
     dns4: '{{ network }}.251'
     dns4_search: '{{ cluster_name }}.{{ root_domain }}'
