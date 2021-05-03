@@ -2,6 +2,7 @@
 # handlers file for roles/matchbox
 
 - name: Restart Firewalld
-  service:
+  become: yes
+  ansible.builtin.systemd:
     name: firewalld
     state: restarted
