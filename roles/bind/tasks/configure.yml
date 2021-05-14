@@ -30,7 +30,7 @@
   community.general.nmcli:
     conn_name: '{{ bind_network_interface_name }}'
     type: ethernet
-    dns4: '{{ network }}.251'
+    dns4: '{{ network }}.{{ host_octet }}'
     dns4_search: '{{ cluster_name }}.{{ root_domain }}'
     state: present
   notify:
