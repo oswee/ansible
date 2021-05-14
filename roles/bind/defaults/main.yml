@@ -4,7 +4,8 @@
 root_domain: example.com
 cluster_name: ocp
 network: 192.168.1
-network_interface_name: eth0
+# Add prefixes for the shared roles to avoid colisions!
+bind_network_interface_name: eth0
 dns:
   - forwarder1: 1.1.1.1
   - forwarder2: 8.8.8.8
