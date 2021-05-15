@@ -1,7 +1,7 @@
 galaxy_info:
-  author: your name
+  author: Dzintars Klavins
   description: your description
-  company: your company (optional)
+  company: Oswee
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -48,4 +48,4 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies:
-- dzintars.ansible.firewalld
+  - name: oswee.ansible.firewalld
