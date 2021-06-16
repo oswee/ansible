@@ -1,36 +1,39 @@
 - name: Copy Jenkins systemd unit
-  copy:
+  ansible.builtin.copy:
     src: jenkins.service
     dest: /etc/systemd/system/jenkins.service
     mode: '0644'
 
 - name: Copy Jenkins SSH systemd service unit
-  template:
+  ansible.builtin.template:
     src: sign-jenkins-ssh-cert.service.j2
     dest: /etc/systemd/system/sign-jenkins-ssh-cert.service
     mode: '0644'
 
 - name: Copy Jenkins SSH systemd timer unit
-  copy:
+  ansible.builtin.copy:
     src: sign-jenkins-ssh-cert.timer
     dest: /etc/systemd/system/sign-jenkins-ssh-cert.timer
     mode: '0644'
 
 - name: Force systemd to re-execute itself (2.8 and above)
-  systemd:
+  ansible.builtin.systemd:
     daemon_reexec: yes
 
 - name: Copy config template
-  template:
+  ansible.builtin.template:
     src: jenkins.j2
     dest: /etc/sysconfig/jenkins
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
     mode: 0600
     backup: yes
+  notify:
+    - start "{{ jenkins_service_name }}"
+    - enable "{{ jenkins_service_name }}"
 
 - name: Copy SSH Certificate signing script
-  template:
+  ansible.builtin.template:
     src: sign-jenkins-ssh-cert.sh.j2
     dest: "{{ jenkins_home }}/.ssh/sign-jenkins-ssh-cert.sh"
     owner: "{{ jenkins_user }}"
@@ -38,13 +41,13 @@
     mode: 0600
 
 - name: Make sure a jenkins ssh timer unit is enabled and running
-  systemd:
+  ansible.builtin.systemd:
     name: sign-jenkins-ssh-cert.timer
     enabled: yes
     state: started
 
-- name: Make sure a jenkins.service is enabled and running
-  systemd:
-    name: jenkins
-    enabled: yes
-    state: started
+# - name: Make sure a jenkins.service is enabled and running
+#   ansible.builtin.systemd:
+#     name: jenkins
+#     enabled: yes
+#     state: started
