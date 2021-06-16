@@ -29,8 +29,8 @@
     mode: 0600
     backup: yes
   notify:
-    - start "{{ jenkins_service_name }}"
-    - enable "{{ jenkins_service_name }}"
+    - start {{ jenkins_service_name }}
+    - enable {{ jenkins_service_name }}
 
 - name: Copy SSH Certificate signing script
   ansible.builtin.template:
