@@ -62,7 +62,7 @@
 
 - name: Generate Jenkins OpenSSH ECDSA user keypair
   community.crypto.openssh_keypair:
-    path: "{{ jenkins_home }}/.ssh"
+    path: "{{ jenkins_home }}/.ssh/jenkins"
     comment: jenkins@workstation
     type: ecdsa
     size: 521
