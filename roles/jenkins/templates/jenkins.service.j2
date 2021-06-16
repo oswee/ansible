@@ -9,7 +9,7 @@ Type=simple
 EnvironmentFile=/etc/sysconfig/jenkins
 ExecStart=/usr/bin/java ${JENKINS_JAVA_OPTIONS} -jar /usr/lib/jenkins/jenkins.war --httpPort=${JENKINS_PORT} --httpListenAddress=${JENKINS_LISTEN_ADDRESS} ${JENKINS_ARGS}
 Restart=always
-User=jenkins
+User={{ jenkins_user }}
 RestartSec=20
 
 [Install]
