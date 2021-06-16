@@ -16,11 +16,11 @@
     dest: /etc/systemd/system/sign-jenkins-ssh-cert.timer
     mode: '0644'
 
-- name: just force systemd to re-execute itself (2.8 and above)
+- name: Force systemd to re-execute itself (2.8 and above)
   systemd:
     daemon_reexec: yes
 
-- name: copy config template
+- name: Copy config template
   template:
     src: jenkins.j2
     dest: /etc/sysconfig/jenkins
