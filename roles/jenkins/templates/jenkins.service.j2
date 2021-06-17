@@ -7,7 +7,7 @@ Requires=network.target
 [Service]
 Type=simple
 EnvironmentFile=/etc/sysconfig/jenkins
-#ExecStart=/usr/bin/java ${JENKINS_JAVA_OPTIONS} -jar /usr/lib/jenkins/jenkins.war --httpPort=${JENKINS_PORT} --httpListenAddress=${JENKINS_LISTEN_ADDRESS} ${JENKINS_ARGS}
+;ExecStart=/usr/bin/java ${JENKINS_JAVA_OPTIONS} -jar /usr/lib/jenkins/jenkins.war --httpPort=${JENKINS_PORT} --httpListenAddress=${JENKINS_LISTEN_ADDRESS} ${JENKINS_ARGS}
 ExecStart=/usr/bin/java ${JENKINS_JAVA_OPTIONS} -jar /usr/lib/jenkins/jenkins.war --httpPort={{ jenkins_http_port }} --httpListenAddress={{ jenkins_listen_address }}
 Restart=always
 User={{ jenkins_user }}
