@@ -1,6 +1,6 @@
 - name: Copy Jenkins systemd unit
-  ansible.builtin.template:
-    src: jenkins.service.j2
+  ansible.builtin.copy:
+    src: jenkins.service
     dest: /etc/systemd/system/jenkins.service
     mode: '0644'
 
