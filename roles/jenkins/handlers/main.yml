@@ -21,6 +21,7 @@
     daemon_reload: yes
 
 - name: restart firewalld
+  become: yes
   systemd:
     name: firewalld
     state: restarted
