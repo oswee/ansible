@@ -1,5 +1,5 @@
 ---
-# tasks file for jenkins
+# tasks file for roles/jenkins
 
 - name: install
   import_tasks: install.yml

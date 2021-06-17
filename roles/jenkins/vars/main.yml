@@ -5,6 +5,7 @@ packages:
   redhat:
     - jenkins
     - java-1.8.0-openjdk.x86_64
+    - chkconfig  # Temporary added to solve systemd failure to enable service https://unix.stackexchange.com/questions/534463/cant-enable-grafana-on-boot-in-fedora-because-systemd-sysv-install-missing
 
 # jenkins_package_state: latest
 # jenkins_hostname: https://jenkins.example.com
