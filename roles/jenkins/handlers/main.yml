@@ -4,13 +4,13 @@
 - name: start jenkins
   become: yes
   ansible.builtin.systemd:
-    name: "{{ jenkins_service_name }}"
+    name: "{{ jenkins_service_name }}.service"
     state: started
 
 - name: enable jenkins
   become: yes
   ansible.builtin.systemd:
-    name: "{{ jenkins_service_name }}"
+    name: "{{ jenkins_service_name }}.service"
     enabled: yes
 
 - name: restart jenkins
@@ -26,3 +26,15 @@
     name: firewalld
     state: restarted
     daemon_reload: yes
+
+- name: start ssh signing timer
+  become: yes
+  ansible.builtin.systemd:
+    name: sign-jenkins-ssh-cert.timer
+    state: started
+
+- name: enable ssh signing timer
+  become: yes
+  ansible.builtin.systemd:
+    name: sign-jenkins-ssh-cert.timer
+    enabled: yes

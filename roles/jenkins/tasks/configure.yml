@@ -1,26 +1,4 @@
-- name: Copy Jenkins systemd unit
-  ansible.builtin.copy:
-    src: jenkins.service
-    dest: /etc/systemd/system/jenkins.service
-    mode: '0644'
-
-- name: Copy Jenkins SSH systemd service unit
-  ansible.builtin.template:
-    src: sign-jenkins-ssh-cert.service.j2
-    dest: /etc/systemd/system/sign-jenkins-ssh-cert.service
-    mode: '0644'
-
-- name: Copy Jenkins SSH systemd timer unit
-  ansible.builtin.copy:
-    src: sign-jenkins-ssh-cert.timer
-    dest: /etc/systemd/system/sign-jenkins-ssh-cert.timer
-    mode: '0644'
-
-- name: Force systemd to re-execute itself (2.8 and above)
-  ansible.builtin.systemd:
-    daemon_reexec: yes
-
-- name: Copy config template
+- name: Copy Jenkins config template
   ansible.builtin.template:
     src: jenkins.j2
     dest: /etc/sysconfig/jenkins
@@ -28,26 +6,25 @@
     group: "{{ jenkins_group }}"
     mode: 0600
     backup: yes
-  notify:
-    - enable {{ jenkins_service_name }}
-    - start {{ jenkins_service_name }}
 
-- name: Copy SSH Certificate signing script
+- name: Copy Jenkins systemd unit template
+  become: yes
   ansible.builtin.template:
-    src: sign-jenkins-ssh-cert.sh.j2
-    dest: "{{ jenkins_home }}/.ssh/sign-jenkins-ssh-cert.sh"
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode: 0600
+    src: jenkins.service.j2
+    dest: /etc/systemd/system/jenkins.service
+    mode: '0644'
+  # notify:
+  #   - enable {{ jenkins_service_name }}
+  #   - start {{ jenkins_service_name }}
 
-- name: Make sure a jenkins ssh timer unit is enabled and running
+- name: Force systemd to re-execute itself (2.8 and above)
+  become: yes
   ansible.builtin.systemd:
-    name: sign-jenkins-ssh-cert.timer
-    enabled: yes
-    state: started
+    daemon_reexec: yes
 
-# - name: Make sure a jenkins.service is enabled and running
-#   ansible.builtin.systemd:
-#     name: jenkins
-#     enabled: yes
-#     state: started
+- name: start jenkins
+  become: yes
+  ansible.builtin.systemd:
+    name: "{{ jenkins_service_name }}.service"
+    state: "{{ jenkins_service_enabled | ternary('started','stopped') }}"
+    enabled: "{{ jenkins_service_enabled }}"

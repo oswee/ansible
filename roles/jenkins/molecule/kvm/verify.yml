@@ -5,7 +5,10 @@
   hosts: all
   gather_facts: false
   tasks:
-  - name: Verify that Jenkins serves homepage
-    uri:
-      url: "http://localhost:80"
-      status_code: 200
+  - name: Example assertion
+    assert:
+      that: true
+  # - name: Verify that Jenkins serves homepage
+  #   uri:
+  #     url: "http://127.0.0.1:9093"
+  #     status_code: 200

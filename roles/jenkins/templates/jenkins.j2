@@ -16,7 +16,7 @@ JENKINS_HOME="{{ jenkins_home }}"
 # Java executable to run Jenkins
 # When left empty, we'll try to find the suitable Java.
 #
-JENKINS_JAVA_CMD=""
+JENKINS_JAVA_CMD="/usr/bin/java"
 
 ## Type:        string
 ## Default:     "jenkins"
@@ -63,7 +63,7 @@ JENKINS_PORT="{{ jenkins_http_port }}"
 # IP address Jenkins listens on for HTTP requests.
 # Default is all interfaces (0.0.0.0).
 #
-JENKINS_LISTEN_ADDRESS="{{ jenkins_listen_address }}"
+JENKINS_LISTEN_ADDRESS="0.0.0.0"
 
 ## Type:        integer(0:65535)
 ## Default:     ""

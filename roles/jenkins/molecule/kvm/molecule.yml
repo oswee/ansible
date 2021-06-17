@@ -11,9 +11,9 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: fedora
+  - name: jenkins
     box: fedora/33-cloud-base
-    memory: 1024
+    memory: 2048
     cpus: 2
     config_options:
       ssh.keep_alive: yes
@@ -22,8 +22,8 @@ platforms:
       video_type: "'vga'"
     interfaces:
       - network_name: forwarded_port
-        guest: 9000
-        host: 9111
+        guest: 9093
+        host: 9093
     instance_raw_config_args:
       - 'vagrant.plugins = ["vagrant-libvirt"]'
 provisioner:

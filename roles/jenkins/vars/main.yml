@@ -1,12 +1,13 @@
 ---
-# vars file for jenkins
+# vars file for roles/jenkins
 
 packages:
   redhat:
+    - java-devel
+    - chkconfig
     - jenkins
-    - java-1.8.0-openjdk.x86_64
-    - chkconfig  # Temporary added to solve systemd failure to enable service https://unix.stackexchange.com/questions/534463/cant-enable-grafana-on-boot-in-fedora-because-systemd-sysv-install-missing
 
+java_package: java-devel
 # jenkins_package_state: latest
 # jenkins_hostname: https://jenkins.example.com
 # jenkins_http_port: 9093
@@ -23,5 +24,3 @@ packages:
 #   - solarized-theme
 # jenkins_plugins_install_dependencies: true
 # jenkins_plugins_state: latest
-# java_packages:
-#   - java-1.8.0-openjdk.x86_64
