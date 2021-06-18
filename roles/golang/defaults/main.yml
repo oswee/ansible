@@ -1,0 +1,4 @@
+---
+# defaults file for roles/go
+
+golang_version: 1.16.5
