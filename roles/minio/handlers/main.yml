@@ -1,35 +1,41 @@
 ---
-# handlers file for minio
+# handlers file for roles/minio
 
 - name: Change user
+  become: yes
   replace:
     path: /etc/systemd/system/minio.service
     regexp: 'User=minio-user'
     replace: 'User={{ minio_user }}'
 
 - name: Change group
+  become: yes
   replace:
     path: /etc/systemd/system/minio.service
     regexp: 'Group=minio-user'
     replace: 'Group={{ minio_group }}'
 
 - name: Reexec systemd
+  become: yes
   systemd:
     daemon_reexec: yes
 
 - name: Restart firewalld
+  become: yes
   systemd:
     name: firewalld
     state: restarted
     daemon_reload: yes
 
 - name: Start minio
+  become: yes
   service:
     name: minio
     state: started
     enabled: yes
 
 - name: Restart minio
+  become: yes
   systemd:
     name: minio
     state: restarted
