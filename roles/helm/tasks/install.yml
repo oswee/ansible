@@ -12,5 +12,5 @@
   copy:
     src: /tmp/linux-amd64/helm
     dest: /usr/local/bin
-    # mode: a+x
+    mode: a+x
     remote_src: yes
