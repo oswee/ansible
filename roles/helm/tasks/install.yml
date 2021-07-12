@@ -10,7 +10,7 @@
 - name: Copy Helm binary
   become: yes
   copy:
-    src: /tmp/helm
+    src: /tmp/linux-amd64/helm
     dest: /usr/local/bin
     # mode: a+x
     remote_src: yes
