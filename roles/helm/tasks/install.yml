@@ -1,0 +1,16 @@
+---
+# tasks file for roles/helm
+
+- name: Download Helm binary
+  unarchive:
+    src: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+    dest: /tmp
+    remote_src: yes
+
+- name: Copy Helm binary
+  become: yes
+  copy:
+    src: /tmp/helm
+    dest: /usr/local/bin
+    # mode: a+x
+    remote_src: yes

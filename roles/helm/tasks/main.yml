@@ -1,0 +1,8 @@
+---
+# tasks file for roles/helm
+
+- name: install
+  import_tasks: install.yml
+  tags:
+    - helm:setup
+    - helm:setup:install
