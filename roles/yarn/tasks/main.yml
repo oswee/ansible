@@ -1,0 +1,10 @@
+---
+# tasks file for roles/yarn
+
+- name: Install Yarn NPM package globally
+  become: yes
+  community.general.npm:
+    name: yarn@latest
+    global: yes
+
+# TODO: Extend $PATH ENV variable with export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
