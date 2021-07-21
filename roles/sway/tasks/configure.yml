@@ -47,6 +47,23 @@
     - { src: "waybar/config", dest: "$HOME/.config/waybar/", mode: '0644' }
     - { src: "waybar/style.css", dest: "$HOME/.config/waybar/", mode: '0644' }
 
+- name: create wlogout directory
+  file:
+    path: "/home/{{ become_user }}/.config/wlogout"
+    state: directory
+    owner: "{{ become_user }}"
+    group: "{{ become_user }}"
+    mode: '0755'
+
+- name: copy wlogout config
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - { src: "wlogout/layout", dest: "/home/{{ become_user }}/.config/wlogout/", mode: '0644' }
+    - { src: "wlogout/style.css", dest: "/home/{{ become_user }}/.config/wlogout/", mode: '0644' }
+
 - name: create Pictures directories
   file:
     path: "{{ item }}"
