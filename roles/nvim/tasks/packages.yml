@@ -1,6 +1,14 @@
 ---
 # tasks file for roles/nvim
 
+- name: Install complementary packages
+  become: yes
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    "{{ packages }}"
+
 - name: Install Neovim package globally.
   community.general.yarn:
     name: neovim@latest
