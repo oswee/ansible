@@ -2,30 +2,28 @@
 # tasks file for roles/obsidian
 
 - name: Create appimage directory
-  # become: yes
   file:
-    path: "/home/{{ become_user }}/.local/bin/obsidian"
+    path: "/home/{{ become_user }}/.local/share/obsidian"
     state: directory
     mode: '755'
     recurse: yes
 
-- name: Download obsiadian
+- name: Download Obsidian
   get_url:
     url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v{{ obsidian_version }}/Obsidian-{{ obsidian_version }}.AppImage"
-    dest: "/home/{{ become_user }}/.local/bin/obsidian"
+    dest: "/home/{{ become_user }}/.local/share/obsidian"
     mode: u+x
 
 - name: Extract obsidian appimage
-  # become: yes
   shell:
   args:
     cmd: "./Obsidian-{{ obsidian_version }}.AppImage --appimage-extract"
-    chdir: "/home/{{ become_user }}/.local/bin/obsidian"
+    chdir: "/home/{{ become_user }}/.local/share/obsidian"
 
 - name: Create obsidian symlink
-  become: yes
+  # become: yes
   file:
     src: "/home/{{ become_user }}/.local/bin/obsidian/squashfs-root/obsidian"
-    path: /usr/local/bin/obsidian
+    path: "/home{{ become_user }}/.local/bin/obsidian"
     state: link
     force: yes
