@@ -1,0 +1,4 @@
+---
+# defaults file for roles/obsidian
+
+obsidian_version: 0.12.10
