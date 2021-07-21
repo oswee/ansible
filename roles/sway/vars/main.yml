@@ -4,8 +4,14 @@
 packages:
   - sway
   - waybar
+  # Original swaylock application
   # - swaylock
-  - swaylock-effects
+  # Fork of original app to enable bluring.
+  # Default fedora package version lacks correct display rotation.
+  # Build from source to get newer version which fixes rotation issue.
+  # - swaylock-effects
+  - wlogout
+  - wdisplays
   - swayidle
   - mako
   - wofi
