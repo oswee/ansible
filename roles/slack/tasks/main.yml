@@ -1,0 +1,14 @@
+---
+# tasks file for roles/slack
+
+# https://slack.com/intl/en-lv/downloads/instructions/fedora
+- name: Install Slack
+  ansible.builtin.dnf:
+    name: 'https://downloads.slack-edge.com/linux_releases/slack-4.17.0-0.1.fc21.x86_64.rpm'
+    state: present
+
+- name: Copy Slack desktop entry
+  copy:
+    src: slack.desktop
+    dest: "/home/{{ become_user }}/.local/share/applications/slack.desktop"
+    mode: '0644'
