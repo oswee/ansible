@@ -1,0 +1,21 @@
+---
+# tasks file for roles/obs-studio
+
+# - name: Add RPM Fusion repository
+#   ansible.builtin.yum_repository:
+#     name: RPM Fusion
+#     description: RPM Fusion
+#     baseurl: "{{ repo_url_centos }}"
+#     enabled: yes
+#     gpgcheck: yes
+#     repo_gpgcheck: yes
+#     gpgkey: "{{ repo_gpg_centos }}"
+
+- name: Install the nginx rpm from a remote repo
+  ansible.builtin.dnf:
+    name: 'https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-34.noarch.rpm'
+    state: present
+
+# - name: Update cache centos
+#   ansible.builtin.dnf:
+#     update_cache: yes
