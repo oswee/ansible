@@ -4,8 +4,6 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-
-
 # *************************
 # Variables
 # *************************
@@ -14,16 +12,18 @@
 # For electron apps requires `--enable-features=UseOzonePlatform --ozone-platform=wayland`
 xwayland disable
 
-# Logo key. Use Mod1 for Alt.
+# Super key (Windows). Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
 set $term alacritty
-# Your preferred application launcher
+
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
@@ -31,7 +31,7 @@ set $menu wofi --show drun --allow-images
 set $lock_path ~/.config/sway/lock.sh
 set $idle_path ~/.config/sway/idle.sh
 
-# Hide the mouse pointer
+# Hide the mouse pointer after delay
 seat * hide_cursor 6000
 
 ### Output configuration
@@ -46,6 +46,7 @@ output * bg /usr/share/backgrounds/tharsus.jpg fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 output 'Dell Inc. DELL U2913WM 5YD8C328433L' pos 0 0
+# Set the right display in portrait mode
 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL' pos 2560 0 transform 270
 output 'Goldstar Company Ltd LG ULTRAWIDE 0x00000101' pos 3640 0
 focus output 'Dell Inc. DELL U2913WM 5YD8C328433L'
@@ -96,13 +97,15 @@ input "type:keyboard" {
 
     # Start a terminal
     bindsym $mod+Return exec $term
-    bindsym $mod+Menu exec pcmanfm
+    # Open file manager
+    bindsym $mod+Menu exec thunar
+    # Open file editor
     bindsym $mod+Shift+Menu exec alacritty -e nvim
 
     # Kill focused window
     bindsym $mod+Shift+q kill
 
-    # Start your launcher
+    # Start application launcher
     bindsym $mod+d exec $menu
     bindsym Menu exec $menu
 
@@ -123,11 +126,13 @@ input "type:keyboard" {
     # Open Ranger file manager
     bindsym $mod+Shift+Return exec alacritty -e ranger
 
+    # Move entire workspace to the right display
     bindsym $mod+p move workspace to output right
 
     # Lock the screen
     bindsym Control+$mod+l exec $lock_path
 
+    # Multimedia controls
     bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%; exec --no-startup-id pactl set-sink-volume 1 +5%
     bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%; exec --no-startup-id pactl set-sink-volume 1 -5%
     bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle; exec --no-startup-id pactl set-sink-mute 1 toggle
@@ -178,7 +183,7 @@ input "type:keyboard" {
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
 
-    # Move focused container to workspace
+    # Move focused container (application) to specific workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
     bindsym $mod+Shift+3 move container to workspace number 3
@@ -221,17 +226,20 @@ input "type:keyboard" {
     # Move focus to the parent container
     bindsym $mod+a focus parent
 
+    # Disable container borders and set gaps
     default_border none
     gaps inner 8
     smart_gaps on
 
+    # Assign workspace to the specific display
     workspace 1 output 'Dell Inc. DELL U2913WM 5YD8C328433L'
 
     seat seat0 xcursor_theme breeze_cursors 28
 
+    # Set custom opacity for listed applications (default no-opacity)
     set $opacity 0.96
-    for_window [app_id="Alacritty"] opacity $opacity
-    for_window [class="obsidian"] opacity $opacity
+    # for_window [app_id="Alacritty"] opacity $opacity
+    # for_window [class="obsidian"] opacity $opacity
 
 
 
