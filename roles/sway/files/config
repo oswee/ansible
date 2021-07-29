@@ -33,6 +33,7 @@ set $idle_path ~/.config/sway/idle.sh
 
 # Hide the mouse pointer after delay
 seat * hide_cursor 6000
+seat * hide_cursor when-typing enable
 
 ### Output configuration
 #
@@ -48,6 +49,7 @@ output * bg /usr/share/backgrounds/tharsus.jpg fill
 output 'Dell Inc. DELL U2913WM 5YD8C328433L' pos 0 0
 # Set the right display in portrait mode
 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL' pos 2560 0 transform 270
+output 'Dell Inc. DELL U2412M 0FFXD47E0V2S' pos -1080 0 transform 270
 output 'Goldstar Company Ltd LG ULTRAWIDE 0x00000101' pos 3640 0
 focus output 'Dell Inc. DELL U2913WM 5YD8C328433L'
 
@@ -83,9 +85,8 @@ focus output 'Dell Inc. DELL U2913WM 5YD8C328433L'
 input "type:keyboard" {
     xkb_layout us,lv(apostrophe)
     xkb_variant nodeadkeys
-    xkb_options grp:alt_shift_toggle
-    xkb_options ctrl:swapcaps
-    repeat_delay 200
+    xkb_options grp:alt_shift_toggle,ctrl:swapcaps
+    repeat_delay 300
     repeat_rate 50
 }
 
