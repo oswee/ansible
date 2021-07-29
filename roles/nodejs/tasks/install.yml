@@ -12,7 +12,7 @@
   become: true
   ansible.builtin.dnf:
     name: "{{ item }}"
-    state: latest
+    state: present
   loop: "{{ packages }}"
 
 #- name: Install Yarn package globally
