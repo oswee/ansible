@@ -103,6 +103,7 @@ seat * hide_cursor when-typing enable
 input "type:keyboard" {
   xkb_layout us,lv(apostrophe)
   xkb_variant nodeadkeys
+  # caps:swapescape
   xkb_options grp:alt_shift_toggle,ctrl:swapcaps,altwin:menu_win
   repeat_delay 300
   repeat_rate 50
