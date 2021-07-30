@@ -4,6 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+
+
 # *************************
 # Variables
 # *************************
@@ -27,18 +29,13 @@ set $term alacritty
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu wofi --show drun --allow-images
-set $lock_path ~/.config/sway/lock.sh
-set $idle_path ~/.config/sway/idle.sh
 
-# Hide the mouse pointer after delay
-seat * hide_cursor 6000
-seat * hide_cursor when-typing enable
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/tharsus.jpg fill
-#
+
+# *************************
+# Output configuration
+# *************************
+
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -50,16 +47,22 @@ output 'Dell Inc. DELL U2913WM 5YD8C328433L' pos 0 0
 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL' pos 2560 0 transform 270
 output 'Dell Inc. DELL U2412M 0FFXD47E0V2S' pos -1200 0 transform 270
 output 'Goldstar Company Ltd LG ULTRAWIDE 0x00000101' pos 3640 0
+
 focus output 'Dell Inc. DELL U2913WM 5YD8C328433L'
 
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /usr/share/backgrounds/tharsus.jpg fill
 
 # Assign workspace to the specific display
 workspace 1 output 'Dell Inc. DELL U2913WM 5YD8C328433L'
 workspace 10 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL'
 
 
-### Idle configuration
-#
+
+# *************************
+# Idle configuration
+# *************************
+
 # Example configuration:
 
 # exec swayidle -w \
@@ -71,8 +74,20 @@ workspace 10 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL'
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
-#
+set $lock_path ~/.config/sway/lock.sh
+set $idle_path ~/.config/sway/idle.sh
+
+# Hide the mouse pointer after delay
+seat * hide_cursor 6000
+seat * hide_cursor when-typing enable
+
+
+
+
+# *************************
+# Input configuration
+# *************************
+
 # Example configuration:
 #
 #   input "2:14:SynPS/2_Synaptics_TouchPad" {
@@ -96,22 +111,24 @@ input "type:keyboard" {
 
 
 # *************************
-# Key bindings: Basics
+# Key bindings: General
 # *************************
 
 # Start a terminal
 bindsym $mod+Return exec $term
-# Open file manager
-bindsym $mod+Menu exec thunar
-# Open file editor
-bindsym $mod+Shift+Menu exec alacritty -e nvim
 
-# Kill focused window
-bindsym $mod+Shift+q kill
+# Open terminal file explorer
+bindsym $mod+Shift+Return exec $term -e ranger
 
 # Start application launcher
 bindsym $mod+d exec $menu
-bindsym Menu exec $menu
+# bindsym Menu exec $menu
+
+# Open GUI file manager
+# bindsym $mod+Menu exec thunar
+
+# Open terminal file editor
+# bindsym $mod+Shift+Menu exec $term -e nvim
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -120,6 +137,9 @@ bindsym Menu exec $menu
 # mouse button for dragging.
 floating_modifier $mod normal
 
+# Kill focused window
+bindsym $mod+Shift+q kill
+
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -127,14 +147,11 @@ bindsym $mod+Shift+c reload
 #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 bindsym $mod+Shift+e exec wlogout
 
-# Open Ranger file manager
-bindsym $mod+Shift+Return exec alacritty -e ranger
-
 # Move entire workspace to the right display
 bindsym $mod+p move workspace to output right
 
 # Lock the screen
-bindsym Control+$mod+l exec $lock_path
+bindsym $mod+Control+l exec $lock_path
 
 # Multimedia controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%; exec --no-startup-id pactl set-sink-volume 1 +5%
@@ -204,7 +221,7 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 
 # *************************
-# Key bindings: Layout stuff
+# Key bindings: Layout
 # *************************
 
 # You can "split" the current object of your focus with
@@ -309,6 +326,8 @@ bindsym Alt+Print exec grim -g "$(slurp)" - | swappy -f -
 # Select the screen area and save it into the file
 #bindsym Alt+Shift+Print exec grim -g "$(slurp)" ~/Pictures/Printscreens/screen-"$(date +'%m.%d.%y %T')".png
 
+
+
 # ***********************
 # Status Bar:
 # ***********************
@@ -317,6 +336,8 @@ bindsym Alt+Print exec grim -g "$(slurp)" - | swappy -f -
 bar {
     swaybar_command waybar
 }
+
+
 
 # ***********************
 # Theme: Gruvbox
