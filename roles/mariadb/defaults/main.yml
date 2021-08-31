@@ -103,7 +103,7 @@ mysql_databases:
 
 # Users.
 mysql_users:
-  - name: '{{ become_user }}'
+  - name: myoswee
     # host: '127.0.0.1'
     host: '%'
     password: secret
