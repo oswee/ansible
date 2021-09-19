@@ -5,5 +5,5 @@ vagrant_version: "2.2.18"
 
 vagrant_rpm: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
 vagrant_archive: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
-with_libvirt_include: "with-libvirt-include=/usr/include/libvirt"
-with_libvirt_lib: "with-libvirt-lib=/usr/lib64"
+vagrant_with_libvirt_include: "with-libvirt-include=/usr/include/libvirt"
+vagrant_with_libvirt_lib: "with-libvirt-lib=/usr/lib64"
