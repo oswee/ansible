@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
 driver:
-  name: delegated
+  name: vagrant
 platforms:
   - name: instance
 provisioner:
