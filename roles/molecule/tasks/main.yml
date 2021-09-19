@@ -1,0 +1,14 @@
+---
+# tasks file for roles/molecule
+
+- name: Install Molecule Podman
+  pip:
+    name: molecule-podman
+
+- name: Install Molecule Vagrant
+  pip:
+    name: molecule-vagrant
+
+- name: Install Molecule Lint
+  pip:
+    name: molecule-lint
