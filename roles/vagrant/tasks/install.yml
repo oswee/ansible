@@ -2,6 +2,7 @@
 # tasks file for roles/vagrant
 
 - name: Install packages
+  become: yes
   dnf:
     name: "{{ item }}"
     state: latest
@@ -9,6 +10,7 @@
     "{{ packages }}"
 
 - name: Install Vagrant
+  become: yes
   dnf:
     name: "{{ vagrant_rpm }}"
     state: latest
