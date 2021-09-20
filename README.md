@@ -17,8 +17,20 @@ ansible-galaxy collection install -r collections.yml -f
 To test the role use
 
 ```bash
-cd roles/<role-name>
+cd roles/role-name
 molecule converge --scenario-name kvm
 ```
 KVM is the only maintained scenario.
 Later potentially I will introduce Podman scenario as well.
+
+## Caveats
+
+There could be issues with OPENSSL library mismatch between Vagrant ruby gems and the
+system libraries. The solution was to download libssl, build it and to copy libk5crypto files into
+`/opt/vagrant/embedded/lib64` directory.
+Follow the Fedora instructions listed in `molecule-libvirt` repository readme.
+This [issue](https://github.com/hashicorp/vagrant/issues/11020) is the primary source to the solution
+
+If Vagrant is complaining about inability to create `virbr0` network, most likely it is worth to re-run
+`oswee.ansible.libvirt` role.
+I had no jet figured out what exactly is broken, but reapplying libvirt role, helps.
