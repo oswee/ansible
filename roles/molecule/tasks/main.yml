@@ -5,14 +5,14 @@
   pip:
     name: molecule
 
-- name: Install Python-vagrant
+- name: Install Python-Vagrant
   pip:
     name: python-vagrant
 
-- name: Install Molecule Podman
+- name: Install Molecule-Podman
   pip:
     name: molecule-podman
 
-- name: Install Molecule Vagrant
+- name: Install Molecule-Vagrant
   pip:
     name: molecule-vagrant
