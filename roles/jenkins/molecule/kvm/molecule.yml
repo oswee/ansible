@@ -12,7 +12,7 @@ lint: |
   ansible-lint
 platforms:
   - name: jenkins
-    box: fedora/33-cloud-base
+    box: fedora/34-cloud-base
     memory: 2048
     cpus: 2
     config_options:
