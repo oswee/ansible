@@ -30,6 +30,6 @@
 #     remote_src: yes
 
 - name: Install Vagrant-Libvirt plugin
-  ansible.builtin.shell: vagrant plugin install vagrant-libvirt
+  ansible.builtin.command: vagrant plugin install vagrant-libvirt
   environment:
     CONFIGURE_ARGS: "with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib64"
