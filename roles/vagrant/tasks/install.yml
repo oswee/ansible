@@ -32,4 +32,5 @@
 - name: Install Vagrant-Libvirt plugin
   command: vagrant plugin install vagrant-libvirt
   environment:
-    CONFIGURE_ARGS: "{{ vagrant_with_libvirt_include }} {{ vagrant_with_libvirt_lib }}"
+    # CONFIGURE_ARGS: "{{ vagrant_with_libvirt_include }} {{ vagrant_with_libvirt_lib }}"
+    CONFIGURE_ARGS: "with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib64"
