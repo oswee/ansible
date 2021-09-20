@@ -1,6 +1,10 @@
 ---
 # tasks file for roles/molecule
 
+- name: Install Python-vagrant
+  pip:
+    name: python-vagrant
+
 - name: Install Molecule Podman
   pip:
     name: molecule-podman
