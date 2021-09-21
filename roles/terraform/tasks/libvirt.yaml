@@ -1,0 +1,38 @@
+---
+# tasks file for roles/terraform
+
+- name: Download Terraform Libvit provider
+  unarchive:
+    src: '{{ libvirt_provider_url }}'
+    dest: /tmp
+    remote_src: true
+
+- name: Create Libvirt provider directory
+  file:
+    path: '~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/{{ libvirt_provider_version }}/linux_amd64'
+    state: directory
+    owner: '{{ become_user }}'
+    group: '{{ become_user }}'
+    mode: '0755'
+
+- name: Create plugins directory
+  file:
+    path: '/home/{{ become_user }}/.terraform.d/plugins'
+    state: directory
+    owner: '{{ become_user }}'
+    group: '{{ become_user }}'
+    mode: '0755'
+
+- name: Copy Terraform Libvirt Plugin binary into libvirt provider directory
+  copy:
+    src: /tmp/terraform-provider-libvirt
+    dest: '~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/{{ libvirt_provider_version }}/linux_amd64/'
+    mode: a+x
+    remote_src: true
+
+- name: Copy Terraform Libvirt Plugin binary into plugins directory
+  copy:
+    src: /tmp/terraform-provider-libvirt
+    dest: '/home/{{ become_user }}/.terraform.d/plugins'
+    mode: a+x
+    remote_src: true

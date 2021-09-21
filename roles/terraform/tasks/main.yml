@@ -7,6 +7,12 @@
     - terraform:setup
     - terraform:setup:install
 
+# - name: install libvirt provider
+#   import_tasks: libvirt.yaml
+#   tags:
+#     - terraform:setup
+#     - terraform:setup:libvirt
+
 # - name: configure
 #   import_tasks: configure.yml
 #   tags:
