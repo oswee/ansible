@@ -7,13 +7,13 @@
     name: unzip.x86_64
     state: latest
 
-- name: Download Terraform "{{ terraform_version }}"
+- name: Download Terraform '{{ terraform_version }}'
   unarchive:
-    src: "{{ terraform_url }}"
+    src: '{{ terraform_url }}'
     dest: /tmp
     remote_src: yes
 
-- name: Copy Terraform "{{ terraform_version }}" binary
+- name: Copy Terraform '{{ terraform_version }}' binary
   become: yes
   copy:
     src: /tmp/terraform
@@ -23,36 +23,36 @@
 
 - name: Download Terraform Libvit provider
   unarchive:
-    src: "{{ libvirt_provider_url }}"
+    src: '{{ libvirt_provider_url }}'
     dest: /tmp
     remote_src: yes
 
 - name: Create Libvirt provider directory
   file:
-    path: "~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/{{ libvirt_provider_version }}/linux_amd64"
+    path: '~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/{{ libvirt_provider_version }}/linux_amd64'
     state: directory
-    owner: "{{ become_user }}"
-    group: "{{ become_user }}"
+    owner: '{{ become_user }}'
+    group: '{{ become_user }}'
     mode: '0755'
 
 - name: Create plugins directory
   file:
-    path: "/home/{{ become_user }}/.terraform.d/plugins"
+    path: '/home/{{ become_user }}/.terraform.d/plugins'
     state: directory
-    owner: "{{ become_user }}"
-    group: "{{ become_user }}"
+    owner: '{{ become_user }}'
+    group: '{{ become_user }}'
     mode: '0755'
 
 - name: Copy Terraform Libvirt Plugin binary into libvirt provider directory
   copy:
     src: /tmp/terraform-provider-libvirt
-    dest: "~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/{{ libvirt_provider_version }}/linux_amd64/"
+    dest: '~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/{{ libvirt_provider_version }}/linux_amd64/'
     mode: a+x
     remote_src: yes
 
 - name: Copy Terraform Libvirt Plugin binary into plugins directory
   copy:
     src: /tmp/terraform-provider-libvirt
-    dest: "/home/{{ become_user }}/.terraform.d/plugins"
+    dest: '/home/{{ become_user }}/.terraform.d/plugins'
     mode: a+x
     remote_src: yes
