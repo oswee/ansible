@@ -5,7 +5,7 @@
   become: yes
   dnf:
     name: unzip.x86_64
-    state: latest
+    state: present
 
 - name: Download Terraform '{{ terraform_version }}'
   unarchive:
