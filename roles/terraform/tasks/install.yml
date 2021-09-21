@@ -2,7 +2,7 @@
 # tasks file for roles/terraform
 
 - name: Install unzip package
-  become: yes
+  become: true
   dnf:
     name: unzip.x86_64
     state: present
@@ -11,11 +11,12 @@
   unarchive:
     src: '{{ terraform_url }}'
     dest: /tmp
-    remote_src: yes
+    remote_src: true
 
 - name: Copy Terraform '{{ terraform_version }}' binary
-  become: yes
+  become: true
   copy:
     src: /tmp/terraform
     dest: /usr/local/bin
     mode: a+x
+    remote_src: true
