@@ -43,6 +43,11 @@
     dest: "/etc/yum.repos.d/kubernetes.repo"
     mode: '0644'
 
+# - name: Update cache centos
+#   become: true
+#   ansible.builtin.dnf:
+#     update_cache: yes
+
 - name: Install Kubectl
   become: true
   ansible.builtin.dnf:
@@ -54,5 +59,4 @@
   ansible.builtin.dnf:
     name: 'https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm'
     state: present
-    # installroot: '/usr/local/bin'
     disable_gpg_check: true
