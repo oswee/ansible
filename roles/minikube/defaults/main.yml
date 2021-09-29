@@ -1,2 +1,5 @@
 ---
 # defaults file for roles/minikube
+
+minikube_version: '1.23.2'
+minikube_download_dir: "/tmp"

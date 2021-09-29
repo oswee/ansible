@@ -1,2 +1,37 @@
 ---
 # tasks file for roles/minikube
+
+- name: Download sha256sum
+  get_url:
+    url: '{{ minikube_mirror }}/{{ minikube_redis_filename }}.sha256'
+    dest: '{{ minikube_download_dir }}/{{ minikube_download_filename }}.sha256'
+    force: no
+    use_proxy: true
+    validate_certs: true
+    mode: 'u=rw,go=r'
+
+- name: Read sha256sum
+  slurp:
+    src: '{{ minikube_download_dir }}/{{ minikube_download_filename }}.sha256'
+  register: minikube_sha256sum
+
+- name: Download Minikube
+  get_url:
+    url: '{{ minikube_mirror }}/{{ minikube_redis_filename }}'
+    dest: '{{ minikube_download_dir }}/{{ minikube_download_filename }}'
+    sha256sum: '{{ minikube_sha256sum.content | b64decode | trim }}'
+    force: no
+    use_proxy: true
+    validate_certs: true
+    mode: 'u=rw,go=r'
+
+- name: Install Minikube
+  become: true
+  copy:
+    src: '{{ minikube_download_dir }}/{{ minikube_download_filename }}'
+    remote_src: true
+    dest: '{{ minikube_install_path }}'
+    force: true
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
