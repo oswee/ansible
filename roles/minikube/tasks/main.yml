@@ -36,7 +36,23 @@
 #     group: root
 #     mode: 'u=rwx,go=rx'
 
+- name: Copy Kubernetes repository
+  become: true
+  copy:
+    src: kubernetes.repo
+    dest: "/etc/yum.repos.d/kubernetes.repo"
+    mode: '0644'
+
+- name: Install Kubectl
+  become: true
+  ansible.builtin.dnf:
+    name: 'kubectl'
+    state: present
+
 - name: Install Minikube RPM
+  become: true
   ansible.builtin.dnf:
     name: 'https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm'
     state: present
+    # installroot: '/usr/local/bin'
+    disable_gpg_check: true
