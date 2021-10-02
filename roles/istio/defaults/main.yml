@@ -1,2 +1,4 @@
 ---
 # defaults file for roles/istio
+
+istio_version: '1.11.3'

@@ -1,2 +1,16 @@
 ---
 # tasks file for roles/istio
+
+- name: Download Istio release source
+  unarchive:
+    src: "https://github.com/istio/istio/releases/download/{{ istio_version }}/istio-{{ istio_version }}-linux-amd64.tar.gz"
+    dest: /opt/istio
+    remote_src: yes
+
+- name: Copy Istio binary
+  # become: yes
+  copy:
+    src: '/opt/istio/bin/istioctl'
+    dest: /home/{{ become_user }}/.local/bin
+    mode: a+x
+    remote_src: yes
