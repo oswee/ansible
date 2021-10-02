@@ -51,5 +51,7 @@ galaxy_info:
 dependencies:
   - role: oswee.ansible.libvirt
     when: minikube_kvm_ready
+  - role: oswee.ansible.kubectl
+    when: minikube_install_kubectl
   - role: oswee.ansible.istio
-    when: minikube_istio_ready
+    when: minikube_install_istio
