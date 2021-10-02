@@ -1,17 +1,18 @@
 # Oswee Ansible Collection
 
-This is NOT PRODUCTION READY collection.
-Some of roles are specific to particular usecases.
+This is NOT PRODUCTION READY collection!
+Some of roles are specific to my particular usecases.
 
 Most likely You don't want to use this collection ATM.
 
 ## Usage
 
-Include the collection in your projects collections.yml file and import it.
+Include the collection in your project collections.yml file and import it.
 
 ```bash
 ansible-galaxy collection install -r collections.yml -f
 ```
+
 `-f` flag will force collection upgrade.
 
 To test the role use
@@ -20,15 +21,17 @@ To test the role use
 cd roles/role-name
 molecule converge --scenario-name kvm
 ```
-KVM is the only maintained scenario.
+
+KVM is the only maintained scenario if at all (too early to spend time on pollishing roles).
 Later potentially I will introduce Podman scenario as well.
+No plans of supporting Docker.
 
 ### Skeleton (Role bootstrapping)
 
 To bootstrap new roles you can use Skeleton.
 Use `ansible-galaxy init --role-skeleton=skeleton roles/role-name` from the root of this repository.
 
-## Caveats
+## Known issues
 
 There could be issues with OPENSSL library mismatch between Vagrant ruby gems and the
 system libraries. The solution was to download libssl, build it and to copy libk5crypto files into
