@@ -16,7 +16,7 @@ readme: README.md
 # A list of the collection's content authors. Can be just the name or in the format 'Full Name <email> (url)
 # @nicks:irc/im.site#channel'
 authors:
-- Dzintars Klavings <dzintars.klavins@gmail.com>
+- Dzintars Klavins <dzintars.klavins@gmail.com>
 
 
 ### OPTIONAL but strongly recommended
@@ -59,4 +59,3 @@ issues: https://github.com/oswee/ansible/issues
 # uses 'fnmatch' to match the files or directories. Some directories and files like 'galaxy.yml', '*.pyc', '*.retry',
 # and '.git' are always filtered
 build_ignore: []
-
