@@ -23,6 +23,11 @@ molecule converge --scenario-name kvm
 KVM is the only maintained scenario.
 Later potentially I will introduce Podman scenario as well.
 
+### Skeleton (Role bootstrapping)
+
+To bootstrap new roles you can use Skeleton.
+Use `ansible-galaxy init --role-skeleton=skeleton roles/role-name` from the root of this repository.
+
 ## Caveats
 
 There could be issues with OPENSSL library mismatch between Vagrant ruby gems and the
