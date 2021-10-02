@@ -1,2 +1,15 @@
 ---
 # tasks file for roles/kubectl
+
+- name: Copy Kubernetes repository
+  become: true
+  copy:
+    src: kubernetes.repo
+    dest: "/etc/yum.repos.d/kubernetes.repo"
+    mode: '0644'
+
+- name: Install Kubectl
+  become: true
+  ansible.builtin.dnf:
+    name: 'kubectl'
+    state: present
