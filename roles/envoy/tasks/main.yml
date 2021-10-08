@@ -1,3 +1,32 @@
 ---
 # tasks file for envoy
 
+- name: Add Envoy RPM repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: Envoy
+    description: Envoy Proxy
+    baseurl: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=el&codename=7'
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: true
+    gpgkey: 'https://rpm.dl.getenvoy.io/public/gpg.CF716AF503183491.key'
+
+# - name: Install Envoy GPG key
+#   become: true
+#   ansible.builtin.rpm_key:
+#     fingerprint: 'CF716AF503183491'
+#     key: 'https://rpm.dl.getenvoy.io/public/gpg.CF716AF503183491.key'
+#     state: present
+
+# - name: Install Envoy RPM repository
+#   become: true
+#   ansible.builtin.get_url:
+#     url: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=el&codename=7'
+#     dest: '/etc/yum.repos.d/envoy.repo'
+
+- name: Install Envoy
+  become: true
+  ansible.builtin.dnf:
+    name: 'getenvoy-envoy'
+    state: present
