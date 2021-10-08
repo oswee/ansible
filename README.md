@@ -30,6 +30,33 @@ No plans of supporting Docker.
 
 To bootstrap new roles you can use Skeleton.
 Use `ansible-galaxy init --role-skeleton=skeleton roles/role-name` from the root of this repository.
+`role/` prefix will be stripped in the output files.
+All template files are located in `./skeleton/*` directory.
+
+### Molecule init
+
+Molecule templates are handled by Skeleton so typically you should not create molecule scenarios manually.
+But if you have some custom requirements, then you can generate molecule scenario boilerplate manually:
+
+CD into specific role `cd ./roles/role-name`
+
+Create `default` scenario
+
+```bash
+molecule init scenario default -r role-name --driver-name delegated
+```
+
+Create `kvm` scenario
+
+```bash
+molecule init scenario kvm -r role-name --driver-name vagrant
+```
+
+Create `podman` scenario
+
+```bash
+molecule init scenario podman -r role-name --driver-name podman
+```
 
 ## Known issues
 

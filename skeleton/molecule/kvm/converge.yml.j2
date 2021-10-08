@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: 'Include {{ role_name|replace('roles/', '') }}'
+      include_role:
+        name: '{{ role_name|replace('roles/', '') }}'
