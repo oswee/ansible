@@ -1,3 +1,7 @@
 ---
 # handlers file for envoy
 
+- name: Systemd daemon-reload
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
