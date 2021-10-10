@@ -14,7 +14,7 @@
     url: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=el&codename=7'
     dest: '/etc/yum.repos.d/envoy.repo'
 
-- name: Create envoy directory
+- name: Create Envoy config directory
   become: true
   ansible.builtin.file:
     path: '/etc/envoy'
@@ -23,7 +23,7 @@
     group: root
     mode: '0644'
 
-- name: Copy default template to Envoy directory
+- name: Copy default Envoy config file
   become: true
   ansible.builtin.template:
     src: 'envoy.yaml.j2'
@@ -31,7 +31,7 @@
     owner: root
     group: root
     mode: '0644'
-    validate: 'envoy --mode validate --config-path %s'
+    # validate: 'envoy --mode validate --config-path %s'
 
 - name: Install Envoy
   become: true
