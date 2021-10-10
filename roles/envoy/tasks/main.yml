@@ -31,7 +31,7 @@
     owner: root
     group: root
     mode: '0644'
-    #validate: envoy --mode validate --config-path %s
+    validate: 'envoy --mode validate --config-path %s'
 
 - name: Install Envoy
   become: true
@@ -42,15 +42,11 @@
 - name: Install Envoy Proxy systemd service
   become: true
   ansible.builtin.template:
-    src: "envoyproxy.service.j2"
-    dest: "/etc/systemd/system/envoyproxy.service"
+    src: 'envoy.service.j2'
+    dest: '/etc/systemd/system/{{ envoy_service_name }}.service'
     owner: root
     group: root
-    mode: 0644
-  notify: Systemd daemon-reload
-
-- name: Enable Envoy Proxy systemd
-  become: true
-  ansible.builtin.service:
-    name: envoyproxy
-    enabled: yes
+    mode: '0644'
+  notify:
+    - Start Envoy Proxy
+    - Enable Envoy Proxy

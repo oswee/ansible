@@ -1,7 +1,21 @@
 ---
 # handlers file for envoy
 
-- name: Systemd daemon-reload
+- name: Start Envoy Proxy
   become: true
   ansible.builtin.systemd:
+    name: "{{ envoy_service_name }}.service"
+    state: started
+
+- name: Enable Envoy Proxy
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ envoy_service_name }}.service"
+    enabled: true
     daemon_reload: true
+
+- name: Restart Envoy Proxy
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ envoy_service_name }}"
+    state: restarted

@@ -1,2 +1,4 @@
 ---
 # defaults file for envoy
+
+envoy_service_name: 'envoy'
