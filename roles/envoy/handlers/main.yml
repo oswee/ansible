@@ -4,18 +4,18 @@
 - name: Start Envoy Proxy
   become: true
   ansible.builtin.systemd:
-    name: "{{ envoy_service_name }}.service"
+    name: '{{ envoy_service_name }}.service'
     state: started
 
 - name: Enable Envoy Proxy
   become: true
   ansible.builtin.systemd:
-    name: "{{ envoy_service_name }}.service"
+    name: '{{ envoy_service_name }}.service'
     enabled: true
     daemon_reload: true
 
 - name: Restart Envoy Proxy
   become: true
   ansible.builtin.systemd:
-    name: "{{ envoy_service_name }}"
+    name: '{{ envoy_service_name }}'
     state: restarted

@@ -14,10 +14,16 @@
     url: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=el&codename=7'
     dest: '/etc/yum.repos.d/envoy.repo'
 
+- name: Install Envoy
+  become: true
+  ansible.builtin.dnf:
+    name: 'getenvoy-envoy'
+    state: present
+
 - name: Create Envoy config directory
   become: true
   ansible.builtin.file:
-    path: '/etc/envoy'
+    path: '{{ envoy_config_dir }}'
     state: directory
     owner: root
     group: root
@@ -27,17 +33,11 @@
   become: true
   ansible.builtin.template:
     src: 'envoy.yaml.j2'
-    dest: '/etc/envoy/envoy.yaml'
+    dest: '{{ envoy_config_path }}'
     owner: root
     group: root
     mode: '0644'
     # validate: 'envoy --mode validate --config-path %s'
-
-- name: Install Envoy
-  become: true
-  ansible.builtin.dnf:
-    name: 'getenvoy-envoy'
-    state: present
 
 - name: Install Envoy Proxy systemd service
   become: true
