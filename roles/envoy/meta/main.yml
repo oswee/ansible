@@ -1,5 +1,6 @@
 galaxy_info:
-  role_name: ansible.envoy
+  # role_name: envoy
+  namespace: oswee
   version: '0.0.1'
   author: 'Dzintars Klavins'
   description: 'Ansible Galaxy role to maintain envoy.'

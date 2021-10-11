@@ -27,7 +27,7 @@ Including an example of how to use your role (for instance, with variables passe
 users too:
 
 - hosts: servers
-roles:
+  roles:
 - { role: username.rolename, x: 42 }
 
 ## License
@@ -37,3 +37,9 @@ BSD
 ## Author Information
 
 An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+
+## References
+
+- https://www.envoyproxy.io/docs/envoy/latest/operations/hot_restarter
+- https://github.com/tetratelabs-attic/getenvoy.io/issues/100
+- https://github.com/envoyproxy/envoy/issues/4195

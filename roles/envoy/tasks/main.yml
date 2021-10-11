@@ -1,52 +1,16 @@
 ---
 # tasks file for envoy
 
-- name: Install Envoy GPG key
-  become: true
-  ansible.builtin.rpm_key:
-    fingerprint: 'A8220FC0141BFA990DE5609CCF716AF503183491'
-    key: 'https://rpm.dl.getenvoy.io/public/gpg.CF716AF503183491.key'
-    state: present
+- name: install
+  import_tasks: install.yml
+  tags:
+    - envoy:install
 
-- name: Install Envoy RPM repository
-  become: true
-  ansible.builtin.get_url:
-    url: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=el&codename=7'
-    dest: '/etc/yum.repos.d/envoy.repo'
+# TODO: WIP
+# - name: systemd
+#   import_tasks: systemd.yml
 
-- name: Install Envoy
-  become: true
-  ansible.builtin.dnf:
-    name: 'getenvoy-envoy'
-    state: present
-
-- name: Create Envoy config directory
-  become: true
-  ansible.builtin.file:
-    path: '{{ envoy_config_dir }}'
-    state: directory
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: Copy default Envoy config file
-  become: true
-  ansible.builtin.template:
-    src: 'envoy.yaml.j2'
-    dest: '{{ envoy_config_path }}'
-    owner: root
-    group: root
-    mode: '0644'
-    # validate: 'envoy --mode validate --config-path %s'
-
-- name: Install Envoy Proxy systemd service
-  become: true
-  ansible.builtin.template:
-    src: 'envoy.service.j2'
-    dest: '/etc/systemd/system/{{ envoy_service_name }}.service'
-    owner: root
-    group: root
-    mode: '0644'
-  notify:
-    - Start Envoy Proxy
-    - Enable Envoy Proxy
+# - name: clean
+#   import_tasks: clean.yml
+#   tags:
+#     - envoy:clean

@@ -1,8 +1,9 @@
 ---
 dependency:
   name: galaxy
-  options:
-    requiremnts-file: requirements.yml
+  # options:
+    # role-file: requirements.yml
+    # requirements-file: collections.yml
 driver:
   name: vagrant
   provider:
@@ -18,7 +19,7 @@ platforms:
     memory: 1024
     cpus: 2
     config_options:
-      ssh.keep_alive: yes
+      ssh.keep_alive: true
       ssh.remote_user: "'vagrant'"
     provider_options:
       video_type: "'vga'"
@@ -33,8 +34,9 @@ provisioner:
   connection_options:
     ansible_ssh_user: vagrant
     ansible_become: true
-  playlbooks:
-    converge: converge.yaml
+  # playbooks:
+  #   - converge: converge.yml
+  #   - cleanup: cleanup.yml
   log: true
   lint: |
     set -e
