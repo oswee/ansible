@@ -2,7 +2,7 @@ local status, telescope = pcall(require, "telescope")
 if (not status) then return end
 
 local builtin = require("telescope.builtin")
-local h = require('helpers')
+local map = require('helpers').map
 
 local opts = { noremap = true, silent = true }
 
@@ -48,12 +48,20 @@ telescope.setup{
 
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+  },
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = false,
+      override_file_sorter = true,
+    }
   }
 }
 
+require('telescope').load_extension('fzy_native')
+
 -- _G.map("n", "<Leader>ff", ":Telescope find_files<CR>", opts)
 -- _G.map('n', '<Leader>ff', ":Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<CR>", opts)
-h.map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
-h.map("n", "<Leader>fg", ":Telescope live_grep<CR>", opts)
-h.map("n", "<Leader>fb", ":Telescope buffers<CR>", opts)
-h.map("n", "<Leader>fh", ":Telescope help_tags<CR>", opts)
+map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
+map("n", "<Leader>fg", ":Telescope live_grep<CR>", opts)
+map("n", "<Leader>fb", ":Telescope buffers<CR>", opts)
+map("n", "<Leader>fh", ":Telescope help_tags<CR>", opts)

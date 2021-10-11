@@ -1,0 +1,45 @@
+---
+  # tasks file for roles/nvim
+
+- name: Create NeoVim config root directory.
+  file:
+    path: '{{    nvim_config_dir }}'
+    state: directory
+    # owner: '{{ become_user }}'
+
+- name: Create NeoVim config directories.
+  file:
+    path: '{{ nvim_config_dir }}/{{ item }}'
+    state: directory
+    mode: '0755'
+    # owner: '{{ become_user }}'
+  loop:
+    - 'sessions'
+    - 'undodir'
+
+- name: Copy configuration files
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '{{ item.mode }}'
+  loop:
+    - { src: 'init.lua', dest: '/', mode: '0644' }
+    - { src: 'after/', dest: 'after/', mode: '0644' }
+    - { src: 'ftplugin/', dest: 'ftplugin/', mode: '0644' }
+    - { src: 'lua/', dest: 'lua/', mode: '0644' }
+  notify:
+    - packer install
+    - packer update
+    - packer compile
+
+# TODO: I don't think this should be there at all.
+- name: Add 'vim' alias
+  when: nvim_vim_alias|bool
+  lineinfile:
+    path: '/home/{{ become_user }}/.zshrc'
+    line: 'alias vim="nvim"'
+    owner: '{{ become_user }}'
+    regexp: '^alias vim="nvim"$'
+    state: present
+    insertafter: '^# Aliases'
+    # create: True

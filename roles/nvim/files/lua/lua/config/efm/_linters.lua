@@ -22,4 +22,5 @@ return {
   terraform = require('./config/efm/terraform'),
   vint = require('./config/efm/vint'),
   yamllint = require('./config/efm/yamllint'),
+  phpcsfixer = require('./config/efm/phpcsfixer'),
 }

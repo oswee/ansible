@@ -15,4 +15,7 @@ require('./config/lsp-signature')
 -- require('./config/ale')
 require('./config/telescope')
 require('./config/gundo')
+require('./config/gitgutter')
+require('./config/ultisnips')
+require('./config/php-cs-fixer')
 

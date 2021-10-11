@@ -83,5 +83,5 @@ plugin.setup{
     lualine_z = {}
   },
   tabline = {},
-  extensions = { 'fzf', 'nerdtree', 'fugitive' },
+  extensions = { 'fzf', 'nvim-tree', 'fugitive' },
 }

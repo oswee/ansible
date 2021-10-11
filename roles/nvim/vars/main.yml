@@ -20,6 +20,6 @@ packages:
   - fzf
   - ripgrep
   - the_silver_searcher
-  - bat # for the pretty fzf prewiews
+  - bat # for the pretty fzf previews
   - yamllint
 

@@ -1,4 +1,7 @@
 local g = vim.g
+local map = require('helpers').map
+
+local opts = { noremap = true, silent = true }
 
 g.NERDTreeMinimalUI           = 0  -- Hide Press ? for help
 g.NERDTreeShowHidden          = 1  -- Show hidden files
@@ -13,3 +16,5 @@ g.webdevicons_enable_nerdtree = 1
 -- if g.loaded_webdevicons
 --     call webdevicons#refresh()
 -- endif
+
+map('n', '<C-n>', ':NERDTreeToggle<CR>', opts)

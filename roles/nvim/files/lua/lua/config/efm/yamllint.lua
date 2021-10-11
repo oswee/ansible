@@ -6,5 +6,8 @@ return {
   },
   env = {
     "PYTHONIOENCODING=UTF-8",
-  }
+  },
+  rootMarkers = {
+    ".yamllint",
+  },
 }

@@ -3,7 +3,7 @@ if (not status) then return end
 
 local vim = vim
 local linters = require('./config/efm/_linters')
-local h = require('helpers')
+local get_table_keys = require('helpers').get_table_keys
 
 local format_on_write = true
 
@@ -15,7 +15,7 @@ local lint_settings = {
   python = {linters.black, linters.isort, linters.flake8, linters.mypy},
   typescript = {linters.prettier, linters.eslint},
   javascript = {linters.prettier, linters.eslint},
-  yaml = {linters.prettier},
+  yaml = {linters.yamllint},
   json = {linters.prettier},
   html = {linters.prettier},
   scss = {linters.prettier},
@@ -101,7 +101,7 @@ local function setup_servers()
       rootMarkers = {".git/"},
       languages = lint_settings
     },
-    filetypes = h.get_table_keys(lint_settings)
+    filetypes = get_table_keys(lint_settings)
   }
 end
 

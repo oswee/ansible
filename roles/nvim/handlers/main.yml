@@ -12,9 +12,21 @@
 #   changed_when: no
 
 - name: vim-plug install
+  become: false
   shell: "nvim +Silent +VimEnter +{{ item }} +qall &>/dev/null"
   loop:
     - PlugInstall
     - PlugUpdate
     - PlugUpgrade
+
+- name: packer install
   become: false
+  shell: "nvim +Silent +VimEnter +PackerInstall +qall &>/dev/null"
+
+- name: packer update
+  become: false
+  shell: "nvim +Silent +VimEnter +PackerUpdate +qall &>/dev/null"
+
+- name: packer compile
+  become: false
+  shell: "nvim +Silent +VimEnter +PackerCompile +qall &>/dev/null"

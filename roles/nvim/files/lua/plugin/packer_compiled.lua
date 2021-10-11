@@ -109,10 +109,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/lush.nvim"
   },
-  nerdtree = {
-    loaded = true,
-    path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/nerdtree"
-  },
   ["nvim-compe"] = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/nvim-compe"
@@ -124,6 +120,10 @@ _G.packer_plugins = {
   ["nvim-lspinstall"] = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -141,13 +141,25 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
+  ["popup.nvim"] = {
+    loaded = true,
+    path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
   },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ultisnips = {
+    loaded = true,
+    path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/ultisnips"
   },
   undotree = {
     loaded = true,
@@ -161,10 +173,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
-  ["vim-devicons"] = {
-    loaded = true,
-    path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/vim-devicons"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/vim-fugitive"
@@ -176,6 +184,10 @@ _G.packer_plugins = {
   ["vim-jinja"] = {
     loaded = true,
     path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/vim-jinja"
+  },
+  ["vim-php-cs-fixer"] = {
+    loaded = true,
+    path = "/home/dzintars/.local/share/nvim/site/pack/packer/start/vim-php-cs-fixer"
   },
   ["vim-rooter"] = {
     loaded = true,

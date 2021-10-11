@@ -1,6 +1,5 @@
 ---
-# tasks file for roles/nvim
-
+# tasks file for nvim
 
 - name: Build NeoVim
   import_tasks: build.yml
@@ -8,19 +7,29 @@
     - nvim:setup
     - nvim:setup:build
 
+- name: Lualized setup
+  when: nvim_config_in_lua
+  import_tasks: lua.yml
+  tags:
+    - nvim:setup
+    - nvim:setup:lua
+
 - name: Setup Vim Plug
+  when: not nvim_config_in_lua
   import_tasks: vim-plug.yml
   tags:
     - nvim:setup
     - nvim:setup:vimplug
 
 - name: Setup Install packages
+  when: not nvim_config_in_lua
   import_tasks: packages.yml
   tags:
     - nvim:setup
     - nvim:setup:packages
 
 - name: Update configuration
+  when: not nvim_config_in_lua
   import_tasks: configure.yml
   tags:
     - nvim:setup

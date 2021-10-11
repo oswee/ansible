@@ -1,2 +1,6 @@
 ---
 # defaults file for roles/nvim
+
+nvim_config_dir: "/home/{{ become_user }}/.config/nvim"
+nvim_config_in_lua: yes
+nvim_vim_alias: yes

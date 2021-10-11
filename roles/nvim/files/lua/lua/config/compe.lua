@@ -2,7 +2,7 @@ local status, plugin = pcall(require, "compe")
 if (not status) then return end
 
 local vim = vim
-local h = require('helpers')
+local map = require('helpers').map
 
 vim.o.completeopt = "menuone,noinsert,noselect"
 
@@ -73,11 +73,11 @@ _G.s_tab_complete = function()
   end
 end
 
-h.map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-h.map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-h.map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-h.map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 --This line is important for auto-import
-h.map('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
-h.map('i', '<c-space>', 'compe#complete()', { expr = true })
+map('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
+map('i', '<c-space>', 'compe#complete()', { expr = true })

@@ -19,3 +19,7 @@
     name: pynvim
     state: forcereinstall
 
+- name: Install ansible-lint
+  ansible.builtin.pip:
+    name: 'ansible-lint[community,yamllint]'
+    state: forcereinstall
