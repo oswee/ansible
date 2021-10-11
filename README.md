@@ -15,17 +15,6 @@ ansible-galaxy collection install -r collections.yml -f
 
 `-f` flag will force collection upgrade.
 
-To test the role use
-
-```bash
-cd roles/role-name
-molecule converge --scenario-name kvm
-```
-
-KVM is the only maintained scenario if at all (too early to spend time on pollishing roles).
-Later potentially I will introduce Podman scenario as well.
-No plans of supporting Docker.
-
 ### Skeleton (Role bootstrapping)
 
 To bootstrap new roles you can use Skeleton.
@@ -40,16 +29,16 @@ But if you have some custom requirements, then you can generate molecule scenari
 
 CD into specific role `cd ./roles/role-name`
 
-Create `default` scenario
+Create `default` scenario (Mandatory)
 
 ```bash
 molecule init scenario default -r role-name --driver-name delegated
 ```
 
-Create `kvm` scenario
+Create `vagrant` scenario
 
 ```bash
-molecule init scenario kvm -r role-name --driver-name vagrant
+molecule init scenario vagrant -r role-name --driver-name vagrant
 ```
 
 Create `podman` scenario
@@ -57,6 +46,27 @@ Create `podman` scenario
 ```bash
 molecule init scenario podman -r role-name --driver-name podman
 ```
+
+### Molecule testing
+
+Use this evironment variable to get the colorfule molecule run output:
+
+```bash
+export PY_COLORS=1
+```
+
+I'm sure there is something wrong with my TTY color setup, but i'm too lazy to fix it now.
+
+To test the role use
+
+```bash
+cd roles/role-name
+molecule converge -s vagrant
+```
+
+Vagrant is the only maintained scenario if at all (too early to spend time on pollishing roles).
+Later potentially I will introduce Podman scenario as well.
+No plans of supporting Docker.
 
 ## Known issues
 
