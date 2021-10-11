@@ -1,7 +1,4 @@
 ---
-# vars file for roles/nodejs
+# vars file for nodejs
 
-packages:
-  - gcc-c++
-  - make
-  - nodejs
+nodejs_origin_url: 'https://nodejs.org/dist/v{{ nodejs_version }}/node-v{{ nodejs_version }}-linux-x64.tar.xz'

@@ -1,29 +1,27 @@
 ---
-  # tasks file for roles/nodejs
+  # tasks file for nodejs
 
-# TODO: https://stackoverflow.com/a/49844531/6651080
-- name: install a modularity appstream with defined stream
-  become: true
-  shell: curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
-  args:
-    warn: no
+- name: Ensure nodejs directory exists
+  ansible.builtin.file:
+    path: '{{ nodejs_dir }}'
+    state: directory
+    mode: '0755'
 
-- name: Install NodeJS dependencies
+- name: Install unzip package
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: unzip.x86_64
     state: present
-  loop: "{{ packages }}"
 
-#- name: Install Yarn package globally
-#  become: yes
-#  community.general.npm:
-#    name: yarn@latest
-#    global: yes
+- name: Download NodeJS release source
+  ansible.builtin.unarchive:
+    src: '{{ nodejs_origin_url }}'
+    dest: '{{ nodejs_dir }}'
+    remote_src: true
+    # Strip the top level directory
+    extra_opts: [--strip-components=1]
 
-#- name: Install TypeScript package globally
-#  yarn:
-#    name: typescript@latest
-#    global: yes
-
-# TODO: Extend $PATH ENV variable with export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+- name: Add NodeJS to system-wide $PATH
+  ansible.builtin.copy:
+    dest: /etc/profile.d/nodejs.sh
+    content: export PATH={{ nodejs_dir }}/bin:$PATH
