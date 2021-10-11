@@ -4,4 +4,4 @@
   tasks:
     - name: Include NeoVim
       include_role:
-        name: oswee.ansible.nvim
+        name: nvim

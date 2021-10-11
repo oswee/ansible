@@ -11,6 +11,7 @@ driver:
   provider:
     name: libvirt
     type: libvirt
+    driver: kvm
 lint: |
   set -e
   yamllint .
@@ -18,6 +19,8 @@ lint: |
 platforms:
   - name: f34-nvim
     box: fedora/34-cloud-base
+    raw_config_args:
+      - "cpu_mode = 'host-passthrough'"
     memory: 1024
     cpus: 2
     config_options:
@@ -29,17 +32,21 @@ platforms:
       - 'vagrant.plugins = ["vagrant-libvirt"]'
 provisioner:
   name: ansible
+  playbooks:
+    converge: converge.yml
+  #  cleanup: cleanup.yml
+  options:
+    vvv: yes
+    # vault-id: '@$HOME/.ansible/.vault.key'
   connection_options:
     ansible_ssh_user: vagrant
     ansible_become: true
-  # playbooks:
-  #   - converge: converge.yml
-  #   - cleanup: cleanup.yml
-  log: true
+    ansible_connection: smart  # Override the connection: local
   env:
-    # ANSIBLE_CONFIG: ../../ansible.cfg
+    ANSIBLE_CONFIG: ../../ansible.cfg
     ANSIBLE_ROLES_PATH: "../../roles/"
-  #   ANSIBLE_COLLECTIONS_PATHS: "../../collections"
+    ANSIBLE_COLLECTIONS_PATHS: "../../collections"
+  log: true
   lint: |
     set -e
     yamllint .
