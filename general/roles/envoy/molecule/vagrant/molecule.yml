@@ -14,7 +14,7 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: envoy
+  - name: f34-envoy
     box: fedora/34-cloud-base
     memory: 1024
     cpus: 2
