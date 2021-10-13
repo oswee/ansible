@@ -3,4 +3,4 @@
 
 protoc_version: '3.18.1'
 protoc_dir: '/opt/protoc'
-become_user: 'vagrant'
+protoc_group: 'wheel'

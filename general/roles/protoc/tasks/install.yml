@@ -2,12 +2,11 @@
 # install tasks file for protoc
 
 - name: Ensure protoc directory exists
-  become: true
   ansible.builtin.file:
     path: '{{ protoc_dir }}'
     state: directory
-    group: '{{ become_user }}'
-    mode: '0755'
+    # mode: '0755'
+    mode: "u=rwx,go=rx"
 
 - name: Install unzip package
   become: true
@@ -16,47 +15,13 @@
     state: present
 
 - name: Download Protoc compiler
-  become: true
   ansible.builtin.unarchive:
     src: https://github.com/protocolbuffers/protobuf/releases/download/v{{ protoc_version }}/protoc-{{ protoc_version }}-linux-x86_64.zip
     dest: '{{ protoc_dir }}'
     remote_src: true
-    group: '{{ become_user }}'
+    group: '{{ protoc_group }}'
 
-# Use `source /etc/profile.d/protoc.sh` to source the file
-# TODO: Keep in mind that this will override the file if that is modified from the other place
 - name: Add Protoc to system-wide $PATH
-  become: true
   ansible.builtin.copy:
     dest: /etc/profile.d/protoc.sh
-    content: PATH=$PATH:{{ protoc_dir }}/bin:{{ protoc_dir }}/include
-
-# - name: Copy Protoc binary
-#   become: true
-#   copy:
-#     src: /tmp/protoc3/bin/protoc
-#     dest: /usr/local/bin
-#     mode: a+x
-#     remote_src: true
-
-# - name: Copy Protoc includes
-#   become: true
-#   copy:
-#     src: /tmp/protoc3/include/
-#     dest: /usr/local/include
-#     remote_src: true
-
-# Potentially `PATH=$PATH:~/usr/local/include` should be added to the path in order for protoc to pick up google annotations like `google.protobuf.Timestamp status_time = 2;`
-
-# - name: Add annotations to system-wide $PATH.
-#   copy:
-#     dest: /etc/profile.d/protoc-path.sh
-#     content: 'PATH=$PATH:/usr/local/include'
-
-
-# Optional: change owner (Solution to "protoc-gen-go: program not found or is not executable" )
-# sudo chown $USER /usr/local/bin/protoc
-# sudo chown -R $USER /usr/local/include/google
-# protoc --version
-
-# !!! If any errors occur check permissions on those directories in /usr/bin !!!
+    content: export PATH={{ protoc_dir }}/bin:{{ protoc_dir }}/include:$PATH
