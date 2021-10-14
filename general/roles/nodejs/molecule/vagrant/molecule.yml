@@ -31,7 +31,7 @@ provisioner:
   name: ansible
   connection_options:
     ansible_ssh_user: vagrant
-    ansible_become: true
+    # ansible_become: true
   # playbooks:
   #   - converge: converge.yml
   #   - cleanup: cleanup.yml
