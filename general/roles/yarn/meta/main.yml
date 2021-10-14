@@ -1,5 +1,6 @@
 galaxy_info:
   namespace: oswee
+  role_name: yarn
   version: '0.0.1'
   author: 'Dzintars Klavins'
   description: 'Ansible Galaxy role to maintain yarn.'
@@ -21,4 +22,4 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-  - name: oswee.general.nodejs
+  - name: nodejs

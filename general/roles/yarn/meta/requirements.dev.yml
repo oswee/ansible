@@ -1,0 +1,9 @@
+---
+
+roles:
+  - name: general.nodejs
+
+# collections:
+#   - name: "file:///home/dzintars/code/github.com/oswee/ansible"
+#     type: "git"
+...
