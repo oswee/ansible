@@ -1,32 +1,42 @@
 ---
-# handlers file for roles/nvim
+# handlers file for nvim
 
 # - name: vim-plug install
 #   command: >
 #     nvim "+PlugInstall --sync" +qa
 
 # - name: vim-plug install
-#   # become: yes
+#   # become: true
 #   ignore_errors: true
 #   raw: nvim "+PlugInstall --sync" +qa &>/dev/null
 #   changed_when: no
 
 - name: vim-plug install
   become: false
-  shell: "nvim +Silent +VimEnter +{{ item }} +qall &>/dev/null"
+  ansible.builtin.shell: "nvim +Silent +VimEnter +{{ item }} +qall &>/dev/null"
   loop:
     - PlugInstall
     - PlugUpdate
     - PlugUpgrade
 
+- name: packer complete
+  become: false
+  ansible.builtin.command: nvim --headless +"autocmd User PackerComplete quitall" +PackerSync
+  # ansible.builtin.command: >
+  #   nvim --headless
+  #   -c 'autocmd User PackerComplete quitall'
+  #   -c 'silent! PackerSync'
+  #   -c 'silent! TSInstall maintained'
+  #   -c 'silent! TSUpdate' &> /dev/null < /dev/tty
+
 - name: packer install
   become: false
-  shell: "nvim +Silent +VimEnter +PackerInstall +qall &>/dev/null"
+  ansible.builtin.shell: "nvim +Silent +VimEnter +PackerInstall +qall &>/dev/null"
 
 - name: packer update
   become: false
-  shell: "nvim +Silent +VimEnter +PackerUpdate +qall &>/dev/null"
+  ansible.builtin.shell: "nvim +Silent +VimEnter +PackerUpdate +qall &>/dev/null"
 
 - name: packer compile
   become: false
-  shell: "nvim +Silent +VimEnter +PackerCompile +qall &>/dev/null"
+  ansible.builtin.shell: "nvim +Silent +VimEnter +PackerCompile +qall &>/dev/null"

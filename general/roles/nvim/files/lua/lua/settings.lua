@@ -83,7 +83,10 @@ set.smartcase      = true
 set.sessionoptions = "blank"                        -- Save empty windows
 
 g.gruvbox_contrast_dark = "hard"  -- Should be declared before colorscheme
-cmd('colo gruvbox')
+vim.o.background = "dark" -- or "light" for light mode
+-- vim.cmd([[colorscheme gruvbox]])
+
+-- cmd('colo gruvbox')
 g.gruvbox_invert_selection = 0
 
 g.indentLine_char_list = {'|', '¦', '┆', '┊'}

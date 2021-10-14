@@ -2,6 +2,7 @@
 # vars file for roles/nvim
 
 build_packages:
+  - git
   - ninja-build
   - libtool
   - autoconf
@@ -22,4 +23,3 @@ packages:
   - the_silver_searcher
   - bat # for the pretty fzf previews
   - yamllint
-

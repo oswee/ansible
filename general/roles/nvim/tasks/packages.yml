@@ -1,25 +1,25 @@
 ---
-# tasks file for roles/nvim
+# tasks file for nvim
 
 - name: Install complementary packages
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
   loop:
     "{{ packages }}"
 
-- name: Install Neovim package globally.
+- name: Install NPM Neovim package globally.
   community.general.yarn:
     name: neovim@latest
-    global: yes
+    global: true
 
 - name: Install pynvim python package
   ansible.builtin.pip:
     name: pynvim
     state: forcereinstall
 
-- name: Install ansible-lint
-  ansible.builtin.pip:
-    name: 'ansible-lint[community,yamllint]'
-    state: forcereinstall
+# - name: Install ansible-lint
+#   ansible.builtin.pip:
+#     name: 'ansible-lint[community,yamllint]'
+#     state: forcereinstall

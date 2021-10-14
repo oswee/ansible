@@ -1,14 +1,21 @@
 ---
-  # tasks file for roles/nvim
+  # tasks file for nvim
+
+- name: Clone Packer repository
+  ansible.builtin.git:
+    repo: https://github.com/wbthomason/packer.nvim
+    dest: '$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim'
+    version: master
+    depth: 1
 
 - name: Create NeoVim config root directory.
-  file:
-    path: '{{    nvim_config_dir }}'
+  ansible.builtin.file:
+    path: '{{ nvim_config_dir }}'
     state: directory
     # owner: '{{ become_user }}'
 
 - name: Create NeoVim config directories.
-  file:
+  ansible.builtin.file:
     path: '{{ nvim_config_dir }}/{{ item }}'
     state: directory
     mode: '0755'
@@ -18,28 +25,29 @@
     - 'undodir'
 
 - name: Copy configuration files
-  copy:
+  ansible.builtin.copy:
     src: '{{ item.src }}'
     dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
     mode: '{{ item.mode }}'
   loop:
-    - { src: 'init.lua', dest: '/', mode: '0644' }
-    - { src: 'after/', dest: 'after/', mode: '0644' }
-    - { src: 'ftplugin/', dest: 'ftplugin/', mode: '0644' }
-    - { src: 'lua/', dest: 'lua/', mode: '0644' }
+    # - { src: 'lua/init.lua', dest: '/', mode: '0644' }
+    # - { src: 'lua/after/', dest: 'after/', mode: '0644' }
+    # - { src: 'lua/ftplugin/', dest: 'ftplugin/', mode: '0644' }
+    - { src: 'lua/', dest: '/', mode: '0644' }
   notify:
+    # - packer complete
     - packer install
     - packer update
     - packer compile
 
 # TODO: I don't think this should be there at all.
 - name: Add 'vim' alias
-  when: nvim_vim_alias|bool
-  lineinfile:
-    path: '/home/{{ become_user }}/.zshrc'
+  ansible.builtin.lineinfile:
+    path: '$HOME/.zshrc'
     line: 'alias vim="nvim"'
-    owner: '{{ become_user }}'
+    # owner: '{{ become_user }}'
     regexp: '^alias vim="nvim"$'
     state: present
     insertafter: '^# Aliases'
     # create: True
+  when: nvim_vim_alias|bool

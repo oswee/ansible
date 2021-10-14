@@ -1,7 +1,17 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: Include NeoVim
-      include_role:
-        name: nvim
+
+  collections:
+    - oswee.general
+
+  vars:
+    become_user: vagrant
+
+  # tasks:
+  #   - name: Include NeoVim
+  #     include_role:
+  #       name: nvim
+
+  roles:
+    - nvim

@@ -1,10 +1,10 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
+-- TODO: not sure does this works at all
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
 return require('packer').startup(function(use)
@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
   --   'gruvbox-community/gruvbox',
   -- }
   use {
-    'npxbr/gruvbox.nvim',
+    'ellisonleao/gruvbox.nvim',
     requires = {'rktjmp/lush.nvim'},
   }
   use 'mhinz/vim-startify'
@@ -75,4 +75,9 @@ return require('packer').startup(function(use)
   use 'mbbill/undotree'
   use 'stephpy/vim-php-cs-fixer'
 
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)

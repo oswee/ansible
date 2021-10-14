@@ -8,32 +8,32 @@
     - nvim:setup:build
 
 - name: Lualized setup
-  when: nvim_config_in_lua
   import_tasks: lua.yml
+  when: nvim_config_in_lua
   tags:
     - nvim:setup
     - nvim:setup:lua
 
-- name: Setup Vim Plug
-  when: not nvim_config_in_lua
-  import_tasks: vim-plug.yml
-  tags:
-    - nvim:setup
-    - nvim:setup:vimplug
-
 - name: Setup Install packages
-  when: not nvim_config_in_lua
   import_tasks: packages.yml
+  # when: not nvim_config_in_lua
   tags:
     - nvim:setup
     - nvim:setup:packages
 
-- name: Update configuration
-  when: not nvim_config_in_lua
-  import_tasks: configure.yml
-  tags:
-    - nvim:setup
-    - nvim:setup:config
+# - name: Setup Vim Plug
+#   import_tasks: vim-plug.yml
+#   when: not nvim_config_in_lua
+#   tags:
+#     - nvim:setup
+#     - nvim:setup:vimplug
+
+# - name: Update configuration
+#   import_tasks: configure.yml
+#   when: not nvim_config_in_lua
+#   tags:
+#     - nvim:setup
+#     - nvim:setup:config
 
 #- name: Remove Neovim
 #  import_tasks: remove.yml
