@@ -1,8 +1,8 @@
 ---
-# tasks file for roles/bazel
+# tasks file for bazel
 
 - name: Download bazelisk
-  become: yes
+  become: true
   get_url:
     url: "https://github.com/bazelbuild/bazelisk/releases/download/v{{ bazel_bazelisk_version }}/bazelisk-linux-amd64"
     dest: /usr/local/bin/bazelisk
@@ -26,14 +26,14 @@
 #     creates: /tmp/bazel-watcher/bazel-bin/ibazel/linux_amd64_pure_stripped
 
 - name: Download ibazel
-  become: yes
+  become: true
   get_url:
     url: "https://github.com/bazelbuild/bazel-watcher/releases/download/v{{ bazel_ibazel_version }}/ibazel_linux_amd64"
     dest: /usr/local/bin/ibazel
     mode: a+x
 
 - name: Download buildifier
-  become: yes
+  become: true
   get_url:
     url: "https://github.com/bazelbuild/buildtools/releases/download/{{ bazel_buildifier_version }}/buildifier"
     dest: /usr/local/bin/buildifier
