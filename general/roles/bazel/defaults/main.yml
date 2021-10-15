@@ -1,6 +1,6 @@
 ---
-# defaults file for roles/bazel
+# defaults file for bazel
 
-bazel_bazelisk_version: 1.9.0
-bazel_ibazel_version: 0.15.10
-bazel_buildifier_version: "4.0.1"
+bazel_bazelisk_version: "1.10.1"
+bazel_ibazel_version: "0.15.10"
+bazel_buildifier_version: "4.2.2"
