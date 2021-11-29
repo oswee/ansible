@@ -30,6 +30,10 @@ users too:
   roles:
 - { role: username.rolename, x: 42 }
 
+## Usage
+
+To remove the Evoy proxy use `sudo dnf remove getenvy-proxy`
+
 ## License
 
 BSD
