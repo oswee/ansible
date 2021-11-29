@@ -49,4 +49,4 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies:
-  - role: oswee.ansible.kubectl
+  - role: oswee.general.kubectl

@@ -49,9 +49,9 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies:
-  - role: oswee.ansible.libvirt
+  - role: oswee.general.libvirt
     when: minikube_kvm_ready
-  - role: oswee.ansible.kubectl
+  - role: oswee.general.kubectl
     when: minikube_install_kubectl
-  - role: oswee.ansible.istio
+  - role: oswee.general.istio
     when: minikube_install_istio

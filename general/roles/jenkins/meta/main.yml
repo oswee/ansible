@@ -49,4 +49,4 @@ galaxy_info:
 
 
 dependencies:
-- name: oswee.ansible.firewalld
+- name: oswee.general.firewalld

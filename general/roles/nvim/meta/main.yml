@@ -22,5 +22,5 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-  - yarn
-  - github
+  - oswee.general.yarn
+  - oswee.general.github
