@@ -57,18 +57,25 @@
   },
 
   "custom/keyboard_layout": {
-    "format": " {}",
-    "exec": "keyboard_layout_monitor",
+    "format": "  {}",
+    "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
+    "interval": 5,
+    "signal": 1,
+    "tooltip": false,
     "on-click": "keyboard_layout_switcher"
   },
 
   "pulseaudio": {
-    "format": "{icon} {volume:2}%",
-    "format-bluetooth": "{icon} {volume}% ",
-    "format-muted": "MUTE",
+    "format": "{icon} {volume:2}% {format_source}",
+    "format-muted": " {format_source}",
+    "format-bluetooth": "{icon}  {volume}% {format_source}",
+    "format-bluetooth-muted": " {icon}  {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
     "format-icons": {
       "headphones": "",
-      "default": ["", ""]
+      "headset": "",
+      "default": ["", "", ""]
     },
     "scroll-step": 5,
     "on-click-right": "pavucontrol"
