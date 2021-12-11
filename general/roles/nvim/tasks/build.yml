@@ -1,5 +1,5 @@
 ---
-# task file for nvim
+# tasks file for nvim
 
 - name: Install build prerequisites
   become: true
