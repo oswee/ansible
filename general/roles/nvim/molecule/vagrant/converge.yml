@@ -14,4 +14,4 @@
   #       name: nvim
 
   roles:
-    - nvim
+    - oswee.general.nvim

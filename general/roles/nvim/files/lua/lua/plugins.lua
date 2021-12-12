@@ -21,23 +21,20 @@ return require('packer').startup(function(use)
   use 'folke/lsp-colors.nvim'                                            -- Create missing LSP diagnostics highlight groups for color schemes that don't yet support the Neovim 0.5 builtin LSP client
   use 'sirver/ultisnips'
 
-  -- use {
-  --   'gruvbox-community/gruvbox',
-  -- }
   use {
-    'ellisonleao/gruvbox.nvim',
+    'npxbr/gruvbox.nvim',
     requires = {'rktjmp/lush.nvim'},
   }
   use 'mhinz/vim-startify'
-  use {
-    'preservim/nerdtree',
-    requires = {'ryanoasis/vim-devicons'},
-  }
   -- use {
-  --   'kyazdani42/nvim-tree.lua',
-  --   requires = 'kyazdani42/nvim-web-devicons',
-  --   config = function() require'nvim-tree'.setup {} end
+  --   'preservim/nerdtree',
+  --   requires = {'ryanoasis/vim-devicons'},
   -- }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function() require'nvim-tree'.setup {} end
+  }
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},

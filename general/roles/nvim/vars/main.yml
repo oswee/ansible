@@ -1,5 +1,5 @@
 ---
-# vars file for roles/nvim
+# vars file for nvim
 
 build_packages:
   - git
