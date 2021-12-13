@@ -9,7 +9,7 @@
 
 - name: Download efm-langserver release binary
   ansible.builtin.unarchive:
-    src: "https://github.com/mattn/efm-langserver/releases/download/v0.0.37/efm-langserver_v0.0.37_linux_amd64.tar.gz"
+    src: "https://github.com/mattn/efm-langserver/releases/download/v0.0.38/efm-langserver_v0.0.38_linux_amd64.tar.gz"
     dest: $HOME/.local/bin
     remote_src: yes
     extra_opts: [--strip-components=1]
@@ -43,7 +43,7 @@
     - 'sessions'
     - 'undodir'
 
-- name: Copy configuration files
+- name: Copy Lua configuration files
   ansible.builtin.copy:
     src: '{{ item.src }}'
     dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
@@ -52,7 +52,8 @@
     # - { src: 'lua/init.lua', dest: '/', mode: '0644' }
     # - { src: 'lua/after/', dest: 'after/', mode: '0644' }
     # - { src: 'lua/ftplugin/', dest: 'ftplugin/', mode: '0644' }
-    - { src: 'lua/', dest: '/', mode: '0644' }
+    - { src: 'lua-{{ nvim_environment }}/', dest: '/lua', mode: '0644' }
+  when: nvim_config_in_lua | bool
   notify:
     # - packer complete
     - packer install
@@ -69,4 +70,4 @@
     state: present
     insertafter: '^# Aliases'
     # create: True
-  when: nvim_vim_alias|bool
+  when: nvim_vim_alias | bool

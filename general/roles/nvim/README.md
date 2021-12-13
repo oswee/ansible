@@ -3,6 +3,9 @@
 This role is meant to build NeoVim from source files.
 Currently it does my personal configuration as well, but in near future I plan to extract that in another role to keep this one generic.
 
+For testing purposes this role contains 3 alternative variations.
+Refer to default variables to toggle one or the other.
+
 ## Requirements
 
 Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.

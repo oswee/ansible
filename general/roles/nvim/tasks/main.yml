@@ -7,16 +7,23 @@
     - nvim:setup
     - nvim:setup:build
 
-- name: Lualized setup
-  import_tasks: lua.yml
-  when: nvim_config_in_lua
+- name: Configure NeoVim with Lua
+  import_tasks: config-lua.yaml
+  when: nvim_config_in_lua | bool
   tags:
     - nvim:setup
     - nvim:setup:lua
 
+- name: Configure NeoVim with VimScript
+  import_tasks: config-vim.yaml
+  when: not nvim_config_in_lua | bool
+  tags:
+    - nvim:setup
+    - nvim:setup:vim
+
 - name: Setup Install packages
   import_tasks: packages.yml
-  # when: not nvim_config_in_lua
+  # when: not nvim_config_in_lua | bool
   tags:
     - nvim:setup
     - nvim:setup:packages

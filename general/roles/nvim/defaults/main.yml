@@ -1,6 +1,8 @@
 ---
 # defaults file for nvim
 
-nvim_config_dir: "$HOME/.config/nvim"
 nvim_config_in_lua: true
+nvim_environment: "dev"
+
+nvim_config_dir: "$HOME/.config/nvim"
 nvim_vim_alias: false

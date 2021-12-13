@@ -42,7 +42,7 @@
     chdir: '$HOME/code/github.com/neovim/neovim'
     target: nvim
     params:
-      CMAKE_BUILD_TYPE=RelWithDebInfo
+      CMAKE_BUILD_TYPE: RelWithDebInfo
   when:
     - nvim_repo.changed
     - '"neovim" not in ansible_facts.packages'

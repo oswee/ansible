@@ -7,9 +7,6 @@ dependency:
     requirements-file: meta/requirements.dev.yml
     ignore-errors: true
     # ignore-certs: True
-  # env:
-    # ANSIBLE_FORCE_COLOR: true
-    # PY_COLORS: 1
 driver:
   name: vagrant
   provider:
@@ -18,8 +15,8 @@ driver:
     driver: kvm
 lint: |
   set -e
-  yamllint .
-  ansible-lint
+  yamllint -f colored .
+  ansible-lint --force-color .
 platforms:
   - name: f34-nvim
     box: fedora/34-cloud-base
@@ -42,8 +39,8 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
+    prepare: prepare.yaml
     converge: converge.yml
-  #  cleanup: cleanup.yml
   config_options:
     defaults:
       stdout_callback: 'yaml'  # To get pretty output
@@ -57,12 +54,13 @@ provisioner:
     ansible_ssh_user: vagrant
     # ansible_become: true
     ansible_connection: smart  # Override the connection: local
-  # env:
-  #   ANSIBLE_DEBUG: '1'
+  env:
+    ANSIBLE_FORCE_COLOR: true
+    PY_COLORS: true
+  #   ANSIBLE_DEBUG: true
   #   ANSIBLE_CONFIG: ../../ansible.cfg
   #   ANSIBLE_ROLES_PATH: "../../roles/"
   #   ANSIBLE_COLLECTIONS_PATHS: "../../collections"
-  #   ANSIBLE_FORCE_COLOR: true
   log: true
   lint: |
     set -e
