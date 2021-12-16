@@ -1,5 +1,5 @@
 galaxy_info:
-  namespace: oswee
+  namespace: oswee.general
   role_name: yarn
   version: '0.0.1'
   author: 'Dzintars Klavins'
@@ -22,4 +22,4 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-  - name: nodejs
+  - name: oswee.general.nodejs
