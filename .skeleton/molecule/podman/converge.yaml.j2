@@ -1,7 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-    - name: 'Include {{ role_name | regex_replace('.*roles\/') }}'
-      include_role:
-        name: '{{ role_name | regex_replace('.*roles\/') }}'
