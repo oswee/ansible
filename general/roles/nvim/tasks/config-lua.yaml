@@ -31,14 +31,14 @@
   ansible.builtin.file:
     path: '{{ nvim_config_dir }}'
     state: directory
-    # owner: '{{ become_user }}'
+    # owner: '{{ ansible_user_id }}'
 
 - name: Create NeoVim config directories.
   ansible.builtin.file:
     path: '{{ nvim_config_dir }}/{{ item }}'
     state: directory
     mode: '0755'
-    # owner: '{{ become_user }}'
+    # owner: '{{ ansible_user_id }}'
   loop:
     - 'sessions'
     - 'undodir'
@@ -52,7 +52,7 @@
     # - { src: 'lua/init.lua', dest: '/', mode: '0644' }
     # - { src: 'lua/after/', dest: 'after/', mode: '0644' }
     # - { src: 'lua/ftplugin/', dest: 'ftplugin/', mode: '0644' }
-    - { src: 'lua-{{ nvim_environment }}/', dest: '/lua', mode: '0644' }
+    - { src: 'lua-{{ nvim_environment }}/', dest: '/', mode: '0644' }
   when: nvim_config_in_lua | bool
   notify:
     # - packer complete
@@ -65,7 +65,7 @@
   ansible.builtin.lineinfile:
     path: '$HOME/.zshrc'
     line: 'alias vim="nvim"'
-    # owner: '{{ become_user }}'
+    # owner: '{{ ansible_user_id }}'
     regexp: '^alias vim="nvim"$'
     state: present
     insertafter: '^# Aliases'

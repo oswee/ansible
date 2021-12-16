@@ -1,5 +1,5 @@
 galaxy_info:
-  namespace: oswee
+  namespace: oswee.general
   role_name: nvim
   version: '0.0.1'
   author: 'Dzintars Klavins'
@@ -20,6 +20,9 @@ galaxy_info:
     - 'oswee'
     - 'dzintars'
     - 'fedora'
+
+collections:
+  - oswee.general
 
 dependencies:
   - oswee.general.yarn

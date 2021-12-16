@@ -20,7 +20,7 @@
   file:
     path: "$HOME/.local/share/nvim/site/autoload"
     state: directory
-    # owner: "{{ become_user }}"
+    # owner: "{{ ansible_user_id }}"
 
 - name: Install vim plug
   # when: not vim_plug.stat.exists
@@ -28,7 +28,7 @@
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     dest: "$HOME/.local/share/nvim/site/autoload/"
-    # owner: "{{ become_user }}"
+    # owner: "{{ ansible_user_id }}"
     force: yes
 
 - name: Create nvim directory.
@@ -36,7 +36,7 @@
   file:
     path: "$HOME/.config/nvim"
     state: directory
-    # owner: "{{ become_user }}"
+    # owner: "{{ ansible_user_id }}"
 
 - name: Create Neovim directories.
   # when: not vim_plug.stat.exists
@@ -44,7 +44,7 @@
     path: "{{ item }}"
     state: directory
     mode: '0755'
-    # owner: "{{ become_user }}"
+    # owner: "{{ ansible_user_id }}"
   loop:
     - "$HOME/.config/nvim/autoload"
     - "$HOME/.config/nvim/plugins.d"
@@ -94,7 +94,7 @@
   ansible.builtin.lineinfile:
     path: $HOME/.zshrc
     line: "alias vim='nvim'"
-    owner: "{{ become_user }}"
+    owner: "{{ ansible_user_id }}"
     regexp: "^alias vim='nvim'$"
     state: present
     insertafter: '^# Aliases'

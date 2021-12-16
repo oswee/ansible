@@ -82,9 +82,9 @@ set.smartcase      = true
 
 set.sessionoptions = "blank"                        -- Save empty windows
 
-g.gruvbox_contrast_dark = "hard"  -- Should be declared before colorscheme
-cmd('colo gruvbox')
-g.gruvbox_invert_selection = 0
+-- g.gruvbox_contrast_dark = "hard"  -- Should be declared before colorscheme
+-- cmd('colo gruvbox')
+-- g.gruvbox_invert_selection = 0
 
 g.indentLine_char_list = {'|', '¦', '┆', '┊'}
 g.indentLine_setColors = 1  -- Defaults indentLine to grey. Themed by gruvbox seems too bright (noisee) for me

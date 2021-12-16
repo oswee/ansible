@@ -43,6 +43,6 @@
 #     - nvim:setup:config
 
 #- name: Remove Neovim
-#  import_tasks: remove.yml
+#  import_tasks: cleanup.yaml
 #  tags:
-#    - nvim:remove
+#    - nvim:cleanup

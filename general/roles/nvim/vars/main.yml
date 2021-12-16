@@ -17,7 +17,7 @@ build_packages:
   - gettext
 
 packages:
-  - python3-neovim
+  # - python3-neovim
   - fzf
   - ripgrep
   - the_silver_searcher
