@@ -24,6 +24,9 @@ All template files are located in `./.skeleton/*` directory.
 
 ### Molecule init
 
+UPDATE: You should not place Molecule inside of individual role. Molecule is moved to the collection
+level.
+
 Molecule templates are handled by Skeleton so typically you should not create molecule scenarios manually.
 But if you have some custom requirements, then you can generate molecule scenario boilerplate manually:
 
@@ -60,8 +63,12 @@ I'm sure there is something wrong with my TTY color setup, but i'm too lazy to f
 To test the role use
 
 ```bash
-cd roles/role-name
-molecule converge -s vagrant
+cd collection-name
+molecule converge -s role-name
+```
+
+```bash
+molecule converge -s nvim -- --tags config.plugins
 ```
 
 Vagrant is the only maintained scenario if at all (too early to spend time on pollishing roles).
