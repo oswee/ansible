@@ -37,3 +37,4 @@ Dzintars Klavins
 ## Credits
 
 EFM language server configuration is heavily inspired from https://github.com/konapun/dotfiles
+Plugin config layout inspired by https://github.com/Allaman/nvim

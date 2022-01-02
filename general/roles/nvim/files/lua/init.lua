@@ -1,6 +1,0 @@
-require('helpers')
-require('settings')
-require('plugins')
-require('config')
-require('keymaps')
-require('autocmd')

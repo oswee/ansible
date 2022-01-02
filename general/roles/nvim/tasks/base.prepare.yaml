@@ -1,0 +1,20 @@
+---
+
+- name: Install NeoVim build prerequisites
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop:
+    '{{ nvim_build_packages }}'
+
+- name: Get package facts
+  ansible.builtin.package_facts:
+    manager: rpm
+
+- name: Remove default distribution NeoVim package if exists
+  become: true
+  ansible.builtin.dnf:
+    name: neovim
+    state: absent
+  when: '"neovim" in ansible_facts.packages'

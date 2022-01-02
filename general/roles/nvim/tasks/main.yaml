@@ -1,0 +1,90 @@
+---
+# tasks file for nvim
+
+- name: Build prerequisites
+  import_tasks: base.prepare.yaml
+  tags:
+    - base
+    - prepare
+
+- name: System packages
+  import_tasks: base.packages.yaml
+  tags:
+    - base
+    - packages
+
+- name: Build
+  import_tasks: base.build.yaml
+  tags:
+    - base
+    - build
+
+- name: Install
+  import_tasks: base.install.yaml
+  tags:
+    - base
+    - base.install
+
+- name: Helpers
+  import_tasks: helpers.yaml
+  tags:
+    - config
+    - helpers
+
+- name: Config settings
+  import_tasks: modules.core.settings.yaml
+  tags:
+    - config
+    - modules.core.settings
+
+- name: Config Packer
+  import_tasks: modules.packer.yaml
+  tags:
+    - config
+    - modules.packer
+
+- name: Config keymaps
+  import_tasks: modules.core.keymaps.yaml
+  tags:
+    - config
+    - modules.core.keymaps
+
+- name: Config Editor
+  import_tasks: modules.editor.yaml
+  tags:
+    - config
+    - modules.editor
+
+- name: Config UI
+  import_tasks: modules.ui.yaml
+  tags:
+    - config
+    - modules.ui
+
+- name: Config Completion
+  import_tasks: modules.completion.yaml
+  tags:
+    - config
+    - modules.completion
+
+- name: Config LSP
+  import_tasks: modules.lsp.yaml
+  tags:
+    - config
+    - modules.lsp
+
+# - name: Config autocmd
+#   import_tasks: config.autocmd.yaml
+#   tags:
+#     - config.autocmd
+
+- name: Samples
+  import_tasks: samples.yaml
+  tags:
+    - config
+    - samples
+
+#- name: Cleanup
+#  import_tasks: cleanup.yaml
+#  tags:
+#    - cleanup

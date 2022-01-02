@@ -1,7 +1,7 @@
 ---
 # vars file for nvim
 
-build_packages:
+nvim_build_packages:
   - git
   - ninja-build
   - libtool
@@ -23,3 +23,5 @@ packages:
   - the_silver_searcher
   - bat # for the pretty fzf previews
   - yamllint
+  - wget
+  - fd-find
