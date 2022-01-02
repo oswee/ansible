@@ -3,7 +3,7 @@ dependency:
   name: galaxy
   # enabled: false
   options:
-    requirements-file: requirements.yaml
+    # requirements-file: requirements.yaml  # Collections
     # role-file: requirements.yaml
     ignore-errors: true
     # ignore-certs: True
@@ -21,7 +21,7 @@ platforms:
   - name: f34
     box: fedora/34-cloud-base
     cpus: 2
-    memory: 1024
+    memory: 4096
     instance_raw_config_args:
       - 'vagrant.plugins = ["vagrant-libvirt"]'
     provider_raw_config_args:
@@ -39,7 +39,7 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    prepare: prepare.yaml
+    prepare: prepare.yml
     converge: converge.yml
   config_options:
     defaults:

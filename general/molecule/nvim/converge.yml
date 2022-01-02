@@ -3,12 +3,9 @@
   hosts: all
 
   # tasks:
-  #   - name: Include NeoVim
+  #   - name: Include role
   #     include_role:
-  #       name: nvim
-
-  # collections:
-  #   - oswee.general
+  #       name: role-name
 
   roles:
-    - role: nvim
+    - name: oswee.general.nvim
