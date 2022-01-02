@@ -1,9 +1,9 @@
 galaxy_info:
-  namespace: oswee.general
+  namespace: oswee
   role_name: yarn
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible Galaxy role to maintain yarn.'
+  description: 'Ansible Galaxy role to maintain yarn'
   company: 'Oswee'
 
   license: 'Apache-2.0'

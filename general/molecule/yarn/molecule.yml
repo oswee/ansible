@@ -1,11 +1,12 @@
 ---
 dependency:
   name: galaxy
+  # enabled: false
   options:
-    # ignore-certs: true
-    ignore-errors: true
+    requirements-file: requirements.yaml  # Collections
     role-file: requirements.yaml
-    requirements-file: requirements.yaml
+    ignore-errors: true
+    # ignore-certs: true
 driver:
   name: vagrant
   provider:
