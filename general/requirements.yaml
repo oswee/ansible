@@ -1,6 +1,5 @@
 ---
-
-collections:
+# collections:
   # - name: https://github.com/oswee/ansible.git#/general/
   #   version: master
   #   type: git
@@ -11,7 +10,9 @@ collections:
   # - name: ansible.posix
   # - name: community.general
 
-# roles
-#   - name: oswee.general.yarn
-#   - name: oswee.general.github
+# roles:
+#   - role: oswee.general.nodejs
+#   - role: oswee.general.yarn
+#   - role: oswee.general.nvim
+#   - role: oswee.general.github
 ...
