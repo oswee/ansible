@@ -1,10 +1,10 @@
 ---
 galaxy_info:
-  namespace: oswee.general
+  namespace: oswee
   role_name: nodejs
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible Galaxy role to maintain nodejs.'
+  description: 'Ansible Galaxy role to maintain nodejs'
   company: 'Oswee'
 
   license: 'Apache-2.0'
@@ -21,8 +21,5 @@ galaxy_info:
     - 'oswee'
     - 'dzintars'
     - 'fedora'
-
-# collections:
-#   - oswee.general
 
 dependencies: []
