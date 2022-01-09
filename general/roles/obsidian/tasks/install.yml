@@ -1,29 +1,29 @@
 ---
-# tasks file for roles/obsidian
+# tasks file for obsidian
 
 - name: Create appimage directory
-  file:
-    path: "/home/{{ become_user }}/.local/share/obsidian"
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user_id }}/.local/share/obsidian"
     state: directory
     mode: '755'
-    recurse: yes
+    recurse: true
 
 - name: Download Obsidian
-  get_url:
+  ansible.builtin.get_url:
     url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v{{ obsidian_version }}/Obsidian-{{ obsidian_version }}.AppImage"
-    dest: "/home/{{ become_user }}/.local/share/obsidian"
+    dest: "/home/{{ ansible_user_id }}/.local/share/obsidian"
     mode: u+x
 
 - name: Extract obsidian appimage
-  shell:
+  ansible.builtin.shell:
   args:
     cmd: "./Obsidian-{{ obsidian_version }}.AppImage --appimage-extract"
-    chdir: "/home/{{ become_user }}/.local/share/obsidian"
+    chdir: "/home/{{ ansible_user_id }}/.local/share/obsidian"
 
 - name: Create obsidian symlink
-  # become: yes
-  file:
-    src: "/home/{{ become_user }}/.local/bin/obsidian/squashfs-root/obsidian"
-    path: "/home{{ become_user }}/.local/bin/obsidian"
+  # become: true
+  ansible.builtin.file:
+    src: "/home/{{ ansible_user_id }}/.local/bin/obsidian/squashfs-root/obsidian"
+    path: "/home{{ ansible_user_id }}/.local/bin/obsidian"
     state: link
-    force: yes
+    force: true
