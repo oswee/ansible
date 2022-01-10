@@ -19,10 +19,10 @@ setw -g pane-base-index 1
 setw -g monitor-activity on
 set -g visual-activity off
 
-# split panes using _ and -
+# split panes using | and -
 unbind '"'
 unbind %
-bind _ split-window -h
+bind | split-window -h
 bind - split-window -v
 
 # switch panes using Alt-arrow without prefix
