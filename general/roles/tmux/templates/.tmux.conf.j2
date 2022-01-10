@@ -1,4 +1,4 @@
-source "/usr/share/tmux/powerline.conf"
+# source "/usr/share/tmux/powerline.conf"
 
 # remap prefix from 'C-b' to 'C-a'
 unbind C-b
@@ -48,9 +48,11 @@ set-option -sg escape-time 10
 # True color for the Vim
 set-option  -g default-terminal "tmux-256color"
 set-option -gas terminal-overrides ',alacritty:RGB'
+set -g @tmux_power_theme '#ebdbb2'
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'wfxr/tmux-power'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
